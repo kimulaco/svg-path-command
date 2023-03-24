@@ -12,7 +12,7 @@ const config: Config.InitialOptions = {
   },
   testMatch: ['/**/*.spec.ts'],
   collectCoverage: true,
-  collectCoverageFrom: ['<rootDir>/**/*.ts'],
+  collectCoverageFrom: ['<rootDir>/lib/**/*.ts'],
 }
 
 export default config
