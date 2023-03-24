@@ -1,10 +1,13 @@
+import { COMMAND_CHARS } from './command'
+
 interface PathCommand {
   command: string
   parameter: string
 }
 
 export const parse = (pathCommand: string): PathCommand[] => {
-  const commands = pathCommand.split(/(?=M|m)/g)
+  const regexp = new RegExp(`(?=${COMMAND_CHARS.join('|')})`, 'g')
+  const commands = pathCommand.split(regexp)
 
   return commands.map((command: string) => {
     return {
