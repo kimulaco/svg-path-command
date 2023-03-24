@@ -3,33 +3,36 @@ interface MoveToCommand {
 }
 
 export const MOVE_TO_COMMANDS: Record<'M' | 'm', MoveToCommand> = {
-  'M': {
+  M: {
     isRelative: false,
   },
-  'm': {
+  m: {
     isRelative: true,
-  }
+  },
 }
 
-export const LINE_TO_COMMANDS: Record<'L' | 'l' | 'H' | 'h' | 'V' | 'v', MoveToCommand> = {
-  'L': {
+export const LINE_TO_COMMANDS: Record<
+  'L' | 'l' | 'H' | 'h' | 'V' | 'v',
+  MoveToCommand
+> = {
+  L: {
     isRelative: false,
   },
-  'l': {
+  l: {
     isRelative: true,
   },
-  'H': {
+  H: {
     isRelative: false,
   },
-  'h': {
+  h: {
     isRelative: true,
   },
-  'V': {
+  V: {
     isRelative: false,
   },
-  'v': {
+  v: {
     isRelative: true,
-  }
+  },
 }
 
 export const COMMAND_CHARS = [
