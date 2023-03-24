@@ -1,0 +1,30 @@
+{
+  "name": "svg-path-command-parser",
+  "version": "0.0.1",
+  "files": [
+    "/dist",
+    "/types"
+  ],
+  "main": "./dist/svg-path-command-parser.umd.js",
+  "module": "./dist/svg-path-command-parser.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/svg-path-command-parser.es.js",
+      "require": "./dist/svg-path-command-parser.umd.js"
+    }
+  },
+  "types": "./types/index.d.ts",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc && vite build",
+    "watch": "vite build --watch",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.0.5",
+    "typescript": "^5.0.2",
+    "vite": "^4.2.1"
+  }
+}
