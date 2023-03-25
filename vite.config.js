@@ -5,8 +5,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'lib/index.ts'),
-      name: 'SvgPathCommandParser',
-      fileName: (format) => `svg-path-command-parser.${format}.js`,
+      name: 'SvgPathCommand',
+      fileName: (format) => `svg-path-command.${format}.js`,
     },
   },
 })
