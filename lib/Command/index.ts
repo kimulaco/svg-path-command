@@ -1,4 +1,4 @@
-export { PathCommand } from './common'
+export { Command } from './Command'
 export { ABSOLUTE_A, RELATIVE_A, AbsoluteACommand, RelativeACommand } from './A'
 export { ABSOLUTE_C, RELATIVE_C, AbsoluteCCommand, RelativeCCommand } from './C'
 export { ABSOLUTE_H, RELATIVE_H, AbsoluteHCommand, RelativeHCommand } from './H'

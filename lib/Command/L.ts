@@ -1,5 +1,5 @@
-import { PathCommand } from './common'
-import type { CommandParseResult } from './common'
+import { Command } from './Command'
+import type { CommandParseResult } from './Command'
 
 export type AbsoluteLCommandParseResult = CommandParseResult<'x' | 'y'>
 export type RelativeLCommandParseResult = CommandParseResult<'dx' | 'dy'>
@@ -7,7 +7,7 @@ export type RelativeLCommandParseResult = CommandParseResult<'dx' | 'dy'>
 export const ABSOLUTE_L = 'L'
 export const RELATIVE_L = 'l'
 
-export class AbsoluteLCommand extends PathCommand<
+export class AbsoluteLCommand extends Command<
   typeof ABSOLUTE_L,
   AbsoluteLCommandParseResult
 > {
@@ -21,7 +21,7 @@ export class AbsoluteLCommand extends PathCommand<
   }
 }
 
-export class RelativeLCommand extends PathCommand<
+export class RelativeLCommand extends Command<
   typeof RELATIVE_L,
   RelativeLCommandParseResult
 > {

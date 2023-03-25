@@ -1,5 +1,5 @@
-import { PathCommand } from './common'
-import type { CommandParseResult } from './common'
+import { Command } from './Command'
+import type { CommandParseResult } from './Command'
 
 export type AbsoluteQCommandParseResult = CommandParseResult<
   'x1' | 'y1' | 'x' | 'y'
@@ -11,7 +11,7 @@ export type RelativeQCommandParseResult = CommandParseResult<
 export const ABSOLUTE_Q = 'Q'
 export const RELATIVE_Q = 'q'
 
-export class AbsoluteQCommand extends PathCommand<
+export class AbsoluteQCommand extends Command<
   typeof ABSOLUTE_Q,
   AbsoluteQCommandParseResult
 > {
@@ -27,7 +27,7 @@ export class AbsoluteQCommand extends PathCommand<
   }
 }
 
-export class RelativeQCommand extends PathCommand<
+export class RelativeQCommand extends Command<
   typeof RELATIVE_Q,
   RelativeQCommandParseResult
 > {

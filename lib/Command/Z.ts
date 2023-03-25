@@ -1,4 +1,4 @@
-import { PathCommand } from './common'
+import { Command } from './Command'
 
 export type AbsoluteZCommandParseResult = Record<string, never>
 export type RelativeZCommandParseResult = Record<string, never>
@@ -6,7 +6,7 @@ export type RelativeZCommandParseResult = Record<string, never>
 export const ABSOLUTE_Z = 'Z'
 export const RELATIVE_Z = 'z'
 
-export class AbsoluteZCommand extends PathCommand<
+export class AbsoluteZCommand extends Command<
   typeof ABSOLUTE_Z,
   AbsoluteZCommandParseResult
 > {
@@ -17,7 +17,7 @@ export class AbsoluteZCommand extends PathCommand<
   }
 }
 
-export class RelativeZCommand extends PathCommand<
+export class RelativeZCommand extends Command<
   typeof RELATIVE_Z,
   RelativeZCommandParseResult
 > {

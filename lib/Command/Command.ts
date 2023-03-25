@@ -2,7 +2,7 @@ import { isUpperCase } from '../utils/isUpperCase'
 
 export type CommandParseResult<Key extends string> = Record<Key, number | never>
 
-export class PathCommand<
+export class Command<
   Command extends string,
   Result extends CommandParseResult<string>
 > {

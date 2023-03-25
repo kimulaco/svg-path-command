@@ -1,5 +1,5 @@
-import { PathCommand } from './common'
-import type { CommandParseResult } from './common'
+import { Command } from './Command'
+import type { CommandParseResult } from './Command'
 
 export type AbsoluteVCommandParseResult = CommandParseResult<'y'>
 export type RelativeVCommandParseResult = CommandParseResult<'dy'>
@@ -7,7 +7,7 @@ export type RelativeVCommandParseResult = CommandParseResult<'dy'>
 export const ABSOLUTE_V = 'V'
 export const RELATIVE_V = 'v'
 
-export class AbsoluteVCommand extends PathCommand<
+export class AbsoluteVCommand extends Command<
   typeof ABSOLUTE_V,
   AbsoluteVCommandParseResult
 > {
@@ -20,7 +20,7 @@ export class AbsoluteVCommand extends PathCommand<
   }
 }
 
-export class RelativeVCommand extends PathCommand<
+export class RelativeVCommand extends Command<
   typeof RELATIVE_V,
   RelativeVCommandParseResult
 > {

@@ -1,5 +1,5 @@
-import { PathCommand } from './common'
-import type { CommandParseResult } from './common'
+import { Command } from './Command'
+import type { CommandParseResult } from './Command'
 
 export type AbsoluteHCommandParseResult = CommandParseResult<'x'>
 export type RelativeHCommandParseResult = CommandParseResult<'dx'>
@@ -7,7 +7,7 @@ export type RelativeHCommandParseResult = CommandParseResult<'dx'>
 export const ABSOLUTE_H = 'H'
 export const RELATIVE_H = 'h'
 
-export class AbsoluteHCommand extends PathCommand<
+export class AbsoluteHCommand extends Command<
   typeof ABSOLUTE_H,
   AbsoluteHCommandParseResult
 > {
@@ -20,7 +20,7 @@ export class AbsoluteHCommand extends PathCommand<
   }
 }
 
-export class RelativeHCommand extends PathCommand<
+export class RelativeHCommand extends Command<
   typeof RELATIVE_H,
   RelativeHCommandParseResult
 > {
