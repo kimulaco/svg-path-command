@@ -1,0 +1,44 @@
+import { PathCommand } from './common'
+import type { CommandParseResult } from './common'
+
+export type AbsoluteSCommandParseResult = CommandParseResult<
+  'x2' | 'y2' | 'x' | 'y'
+>
+export type RelativeSCommandParseResult = CommandParseResult<
+  'dx2' | 'dy2' | 'dx' | 'dy'
+>
+
+export const ABSOLUTE_S = 'S'
+export const RELATIVE_S = 's'
+
+export class AbsoluteSCommand extends PathCommand<
+  typeof ABSOLUTE_S,
+  AbsoluteSCommandParseResult
+> {
+  marshall(): AbsoluteSCommandParseResult {
+    const result: AbsoluteSCommandParseResult = {
+      x2: this.params[0],
+      y2: this.params[1],
+      x: this.params[2],
+      y: this.params[3],
+    }
+    this.result = result
+    return result
+  }
+}
+
+export class RelativeSCommand extends PathCommand<
+  typeof RELATIVE_S,
+  RelativeSCommandParseResult
+> {
+  marshall(): RelativeSCommandParseResult {
+    const result: RelativeSCommandParseResult = {
+      dx2: this.params[0],
+      dy2: this.params[1],
+      dx: this.params[2],
+      dy: this.params[3],
+    }
+    this.result = result
+    return result
+  }
+}

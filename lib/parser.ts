@@ -1,8 +1,26 @@
-import { COMMAND_CHARS } from './command'
+// TODO Create constants
+const COMMAND_CHARS = [
+  'M',
+  'm',
+  'L',
+  'l',
+  'H',
+  'h',
+  'V',
+  'v',
+  'Q',
+  'q',
+  'S',
+  's',
+  'A',
+  'a',
+  'Z',
+  'z',
+]
 
 interface PathCommand {
   command: string
-  parameter: string
+  param: string
 }
 
 export const parse = (pathCommand: string): PathCommand[] => {
@@ -12,7 +30,7 @@ export const parse = (pathCommand: string): PathCommand[] => {
   return commands.map((command: string) => {
     return {
       command: command[0],
-      parameter: command.slice(1, command.length),
+      param: command.slice(1, command.length),
     }
   })
 }

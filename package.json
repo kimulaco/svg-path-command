@@ -17,7 +17,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "watch": "vite build --watch",
-    "test": "jest",
+    "test": "jest --verbose",
     "typeCheck": "tsc --noEmit",
     "lint:script": "eslint . --ext .js,.ts",
     "lint:script:fix": "eslint . --ext .js,.ts",

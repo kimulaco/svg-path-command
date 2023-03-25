@@ -6,7 +6,7 @@ describe('parse', () => {
       expect(parse('M100,100')).toEqual([
         {
           command: 'M',
-          parameter: '100,100',
+          param: '100,100',
         },
       ])
     })
@@ -15,7 +15,7 @@ describe('parse', () => {
       expect(parse('m100,100')).toEqual([
         {
           command: 'm',
-          parameter: '100,100',
+          param: '100,100',
         },
       ])
     })
@@ -26,7 +26,7 @@ describe('parse', () => {
       expect(parse('L100,100')).toEqual([
         {
           command: 'L',
-          parameter: '100,100',
+          param: '100,100',
         },
       ])
     })
@@ -35,7 +35,7 @@ describe('parse', () => {
       expect(parse('l100,100')).toEqual([
         {
           command: 'l',
-          parameter: '100,100',
+          param: '100,100',
         },
       ])
     })
@@ -44,7 +44,7 @@ describe('parse', () => {
       expect(parse('H100,100')).toEqual([
         {
           command: 'H',
-          parameter: '100,100',
+          param: '100,100',
         },
       ])
     })
@@ -53,7 +53,7 @@ describe('parse', () => {
       expect(parse('h100,100')).toEqual([
         {
           command: 'h',
-          parameter: '100,100',
+          param: '100,100',
         },
       ])
     })
@@ -62,7 +62,7 @@ describe('parse', () => {
       expect(parse('V100,100')).toEqual([
         {
           command: 'V',
-          parameter: '100,100',
+          param: '100,100',
         },
       ])
     })
@@ -71,7 +71,7 @@ describe('parse', () => {
       expect(parse('v100,100')).toEqual([
         {
           command: 'v',
-          parameter: '100,100',
+          param: '100,100',
         },
       ])
     })
@@ -82,7 +82,7 @@ describe('parse', () => {
       expect(parse('C30,90 25,10 50,10')).toEqual([
         {
           command: 'C',
-          parameter: '30,90 25,10 50,10',
+          param: '30,90 25,10 50,10',
         },
       ])
     })
@@ -91,7 +91,7 @@ describe('parse', () => {
       expect(parse('c30,90 25,10 50,10')).toEqual([
         {
           command: 'c',
-          parameter: '30,90 25,10 50,10',
+          param: '30,90 25,10 50,10',
         },
       ])
     })
@@ -100,7 +100,7 @@ describe('parse', () => {
       expect(parse('S70,90 90,90')).toEqual([
         {
           command: 'S',
-          parameter: '70,90 90,90',
+          param: '70,90 90,90',
         },
       ])
     })
@@ -109,7 +109,7 @@ describe('parse', () => {
       expect(parse('s70,90 90,90')).toEqual([
         {
           command: 's',
-          parameter: '70,90 90,90',
+          param: '70,90 90,90',
         },
       ])
     })
@@ -120,19 +120,19 @@ describe('parse', () => {
       expect(parse('L100,100Zl-100,-100z')).toEqual([
         {
           command: 'L',
-          parameter: '100,100',
+          param: '100,100',
         },
         {
           command: 'Z',
-          parameter: '',
+          param: '',
         },
         {
           command: 'l',
-          parameter: '-100,-100',
+          param: '-100,-100',
         },
         {
           command: 'z',
-          parameter: '',
+          param: '',
         },
       ])
     })
