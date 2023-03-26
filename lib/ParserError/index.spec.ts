@@ -7,6 +7,13 @@ describe('ParserError', () => {
     expect(error.message).toBe('Invalid path command')
     expect(error.isParserError).toBeTruthy()
   })
+
+  test('Error: Required message', async () => {
+    const createInstance = () => {
+      new ParserError('')
+    }
+    expect(createInstance).toThrow('Required message')
+  })
 })
 
 describe('isParserError', () => {

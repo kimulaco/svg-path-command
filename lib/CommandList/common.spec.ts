@@ -29,6 +29,16 @@ describe('splitCommand', () => {
       params: [100, 100],
     })
   })
+
+  test('Error: Required command string', async () => {
+    expect(() => splitCommand('')).toThrow('Required command string')
+  })
+
+  test('Error: Invalid command', async () => {
+    expect(() => splitCommand('M top,left')).toThrow(
+      'Invalid command: M top,left'
+    )
+  })
 })
 
 describe('parseCommand', () => {
@@ -169,6 +179,12 @@ describe('parseCommand', () => {
     test('z', async () => {
       const command = parseCommand('z')
       expect(command instanceof RelativeZCommand).toBeTruthy()
+    })
+  })
+
+  describe('Error', () => {
+    test('Unknown command', async () => {
+      expect(() => parseCommand('X100')).toThrow('Unknown command: X100')
     })
   })
 })

@@ -96,7 +96,7 @@ const parseCommandParam = (commandString: string): number[] => {
     const value = Number(param)
 
     if (isNaN(value)) {
-      throw new ParserError(`Invalid path command: ${commandString}`)
+      throw new ParserError(`Invalid command: ${commandString}`)
     }
 
     return value
@@ -159,6 +159,6 @@ export const parseCommand = (commandString: string): CommandType => {
     case RELATIVE_Z:
       return new RelativeZCommand(command, params)
     default:
-      throw new Error('Unknown command')
+      throw new ParserError(`Unknown command: ${commandString}`)
   }
 }
