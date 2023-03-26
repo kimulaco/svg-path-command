@@ -1,11 +1,11 @@
 {
   "name": "svg-path-command",
   "version": "0.0.1-alpha.0",
-  "description": "A library centered on a parser for SVG path data.",
+  "description": "SVG path data parser library.",
   "keywords": [
-    "media query",
-    "match media",
-    "mql"
+    "svg",
+    "path",
+    "parser"
   ],
   "author": "kimulaco",
   "license": "MIT",

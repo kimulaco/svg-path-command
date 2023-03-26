@@ -4,6 +4,8 @@
 [![License MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![codecov](https://codecov.io/gh/kimulaco/svg-path-command/branch/main/graph/badge.svg?token=SL63YJ6XQ0)](https://codecov.io/gh/kimulaco/svg-path-command)
 
+SVG path data parser library.
+
 ## Install
 
 ```bash
@@ -14,6 +16,7 @@ npm i svg-path-command
 
 ```js
 import { parse } from 'svg-path-command'
+// const { parse } = require('svg-path-command') // If CommonJS
 
 const pathCommand = parse('M2,8 L5,2 L8,8')
 
@@ -28,13 +31,13 @@ console.log(pathCommand.commands)
   },
   {
     command: 'L',
-    params: [Array],
+    params: [5, 2],
     isRelative: false,
     result: { x: 5, y: 2 },
   },
   {
     command: 'L',
-    params: [Array],
+    params: [8, 8],
     isRelative: false,
     result: { x: 8, y: 8 },
   },
