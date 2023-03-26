@@ -1,11 +1,29 @@
 {
   "name": "svg-path-command",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.0",
+  "description": "A library centered on a parser for SVG path data.",
+  "keywords": [
+    "media query",
+    "match media",
+    "mql"
+  ],
+  "author": "kimulaco",
   "license": "MIT",
   "files": [
-    "/dist",
-    "/types"
+    "dist",
+    "types",
+    "LICENSE",
+    "package.json",
+    "README.md"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://kimulaco@github.com/kimulaco/svg-path-command.git"
+  },
+  "homepage": "https://github.com/kimulaco/svg-path-command",
+  "bugs": {
+    "url": "https://github.com/kimulaco/svg-path-command/issues"
+  },
   "main": "./dist/svg-path-command.umd.js",
   "module": "./dist/svg-path-command.es.js",
   "exports": {
