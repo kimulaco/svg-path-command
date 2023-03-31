@@ -92,15 +92,19 @@ export type CommandKey = (typeof COMMANDS)[number]
 const parseCommandParam = (commandString: string): number[] => {
   const paramString = commandString.slice(1, commandString.length)
 
-  return paramString.split(/,|\s/g).map((param: string) => {
-    const value = Number(param)
+  return paramString
+    .replace(/-/g, ',-')
+    .split(/,|\s/g)
+    .filter((param) => !!param)
+    .map((param: string) => {
+      const value = Number(param)
 
-    if (isNaN(value)) {
-      throw new ParserError(`Invalid command: ${commandString}`)
-    }
+      if (isNaN(value)) {
+        throw new ParserError(`Invalid command: ${commandString}`)
+      }
 
-    return value
-  })
+      return value
+    })
 }
 
 export const splitCommand = (

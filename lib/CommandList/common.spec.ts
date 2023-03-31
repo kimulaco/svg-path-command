@@ -37,6 +37,20 @@ describe('splitCommand', () => {
     })
   })
 
+  test('c 20,0 15,-80 40,-80', async () => {
+    expect(splitCommand('c 20,0 15,-80 40,-80')).toEqual({
+      command: 'c',
+      params: [20, 0, 15, -80, 40, -80],
+    })
+  })
+
+  test('c -20 0 -15-80 40,-80', async () => {
+    expect(splitCommand('c -20 0 -15-80 40,-80')).toEqual({
+      command: 'c',
+      params: [-20, 0, -15, -80, 40, -80],
+    })
+  })
+
   test('Error: Required command string', async () => {
     expect(() => splitCommand('')).toThrow('Required command string')
   })
