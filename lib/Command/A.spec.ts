@@ -37,6 +37,15 @@ describe('AbsoluteACommand', () => {
     expect(result).toEqual(ABSOLUTE_RESULT)
     expect(command.result).toEqual(ABSOLUTE_RESULT)
   })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new AbsoluteACommand('A', [100, 200, 0, 1, 300, 400, 500])
+    }
+    expect(createInvalidInstance).toThrow(
+      'Command validate error: A, 100,200,0,1,300,400,500'
+    )
+  })
 })
 
 describe('RelativeACommand', () => {
@@ -57,5 +66,14 @@ describe('RelativeACommand', () => {
     const result = command.marshall()
     expect(result).toEqual(RELATIVE_RESULT)
     expect(command.result).toEqual(RELATIVE_RESULT)
+  })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new RelativeACommand('a', [100, 200, 0, 1, 300, 400, 500])
+    }
+    expect(createInvalidInstance).toThrow(
+      'Command validate error: a, 100,200,0,1,300,400,500'
+    )
   })
 })

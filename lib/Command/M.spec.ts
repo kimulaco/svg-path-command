@@ -19,6 +19,15 @@ describe('AbsoluteMCommand', () => {
     expect(result).toEqual({ x: 100, y: 200 })
     expect(command.result).toEqual({ x: 100, y: 200 })
   })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new AbsoluteMCommand('M', [100, 200, 300])
+    }
+    expect(createInvalidInstance).toThrow(
+      'Command validate error: M, 100,200,300'
+    )
+  })
 })
 
 describe('RelativeMCommand', () => {
@@ -39,5 +48,14 @@ describe('RelativeMCommand', () => {
     const result = command.marshall()
     expect(result).toEqual({ dx: 100, dy: 200 })
     expect(command.result).toEqual({ dx: 100, dy: 200 })
+  })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new RelativeMCommand('m', [100, 200, 300])
+    }
+    expect(createInvalidInstance).toThrow(
+      'Command validate error: m, 100,200,300'
+    )
   })
 })

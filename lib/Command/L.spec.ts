@@ -19,6 +19,15 @@ describe('AbsoluteLCommand', () => {
     expect(result).toEqual({ x: 100, y: 200 })
     expect(command.result).toEqual({ x: 100, y: 200 })
   })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new AbsoluteLCommand('L', [100, 200, 300])
+    }
+    expect(createInvalidInstance).toThrow(
+      'Command validate error: L, 100,200,300'
+    )
+  })
 })
 
 describe('RelativeLCommand', () => {
@@ -39,5 +48,14 @@ describe('RelativeLCommand', () => {
     const result = command.marshall()
     expect(result).toEqual({ dx: 100, dy: 200 })
     expect(command.result).toEqual({ dx: 100, dy: 200 })
+  })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new RelativeLCommand('l', [100, 200, 300])
+    }
+    expect(createInvalidInstance).toThrow(
+      'Command validate error: l, 100,200,300'
+    )
   })
 })

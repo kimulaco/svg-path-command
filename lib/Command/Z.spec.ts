@@ -19,6 +19,13 @@ describe('AbsoluteZCommand', () => {
     expect(result).toEqual({})
     expect(command.result).toEqual({})
   })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new AbsoluteZCommand('Z', [100, 200])
+    }
+    expect(createInvalidInstance).toThrow('Command validate error: Z, 100,200')
+  })
 })
 
 describe('RelativeZCommand', () => {
@@ -39,5 +46,12 @@ describe('RelativeZCommand', () => {
     const result = command.marshall()
     expect(result).toEqual({})
     expect(command.result).toEqual({})
+  })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new RelativeZCommand('z', [100, 200])
+    }
+    expect(createInvalidInstance).toThrow('Command validate error: z, 100,200')
   })
 })

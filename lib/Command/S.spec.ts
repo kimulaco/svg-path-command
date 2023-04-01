@@ -33,6 +33,15 @@ describe('AbsoluteSCommand', () => {
     expect(result).toEqual(ABSOLUTE_RESULT)
     expect(command.result).toEqual(ABSOLUTE_RESULT)
   })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new AbsoluteSCommand('S', [100, 200, 300, 400, 500])
+    }
+    expect(createInvalidInstance).toThrow(
+      'Command validate error: S, 100,200,300,400,500'
+    )
+  })
 })
 
 describe('RelativeSCommand', () => {
@@ -53,5 +62,14 @@ describe('RelativeSCommand', () => {
     const result = command.marshall()
     expect(result).toEqual(RELATIVE_RESULT)
     expect(command.result).toEqual(RELATIVE_RESULT)
+  })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new RelativeSCommand('s', [100, 200, 300, 400, 500])
+    }
+    expect(createInvalidInstance).toThrow(
+      'Command validate error: s, 100,200,300,400,500'
+    )
   })
 })

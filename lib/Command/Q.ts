@@ -11,6 +11,8 @@ export type RelativeQCommandParseResult = CommandParseResult<
 export const ABSOLUTE_Q = 'Q'
 export const RELATIVE_Q = 'q'
 
+const PARAM_LENGTH = 4
+
 export class AbsoluteQCommand extends Command<
   typeof ABSOLUTE_Q,
   AbsoluteQCommandParseResult
@@ -24,6 +26,10 @@ export class AbsoluteQCommand extends Command<
     }
     this.result = result
     return result
+  }
+
+  validate(): boolean {
+    return this.params.length === PARAM_LENGTH
   }
 }
 
@@ -40,5 +46,9 @@ export class RelativeQCommand extends Command<
     }
     this.result = result
     return result
+  }
+
+  validate(): boolean {
+    return this.params.length === PARAM_LENGTH
   }
 }
