@@ -20,7 +20,7 @@ import {
   AbsoluteZCommand,
   RelativeZCommand,
 } from '../Command'
-import { splitCommand, parseCommand } from './common'
+import { splitCommand, parseCommand } from './core'
 
 describe('splitCommand', () => {
   test('M100,100', async () => {

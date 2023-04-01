@@ -1,4 +1,4 @@
-import { CommandType, COMMANDS, parseCommand } from './common'
+import { CommandType, COMMANDS, parseCommand } from './core'
 
 export class CommandList {
   commands: CommandType[] = []
