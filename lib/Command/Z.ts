@@ -6,6 +6,8 @@ export type RelativeZCommandParseResult = Record<string, never>
 export const ABSOLUTE_Z = 'Z'
 export const RELATIVE_Z = 'z'
 
+const PARAM_LENGTH = 0
+
 export class AbsoluteZCommand extends Command<
   typeof ABSOLUTE_Z,
   AbsoluteZCommandParseResult
@@ -14,6 +16,10 @@ export class AbsoluteZCommand extends Command<
     const result: AbsoluteZCommandParseResult = {}
     this.result = result
     return result
+  }
+
+  validate(): boolean {
+    return this.params.length === PARAM_LENGTH
   }
 }
 
@@ -25,5 +31,9 @@ export class RelativeZCommand extends Command<
     const result: RelativeZCommandParseResult = {}
     this.result = result
     return result
+  }
+
+  validate(): boolean {
+    return this.params.length === PARAM_LENGTH
   }
 }

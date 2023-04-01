@@ -19,6 +19,13 @@ describe('AbsoluteVCommand', () => {
     expect(result).toEqual({ y: 100 })
     expect(command.result).toEqual({ y: 100 })
   })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new AbsoluteVCommand('V', [100, 200])
+    }
+    expect(createInvalidInstance).toThrow('Command validate error: V, 100,200')
+  })
 })
 
 describe('RelativeVCommand', () => {
@@ -39,5 +46,12 @@ describe('RelativeVCommand', () => {
     const result = command.marshall()
     expect(result).toEqual({ dy: 100 })
     expect(command.result).toEqual({ dy: 100 })
+  })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new RelativeVCommand('v', [100, 200])
+    }
+    expect(createInvalidInstance).toThrow('Command validate error: v, 100,200')
   })
 })

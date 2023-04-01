@@ -7,8 +7,11 @@ export type AbsoluteCCommandParseResult = CommandParseResult<
 export type RelativeCCommandParseResult = CommandParseResult<
   'dx1' | 'dy1' | 'dx2' | 'dy2' | 'dx' | 'dy'
 >
+
 export const ABSOLUTE_C = 'C'
 export const RELATIVE_C = 'c'
+
+const PARAM_LENGTH = 6
 
 export class AbsoluteCCommand extends Command<
   typeof ABSOLUTE_C,
@@ -25,6 +28,10 @@ export class AbsoluteCCommand extends Command<
     }
     this.result = result
     return result
+  }
+
+  validate(): boolean {
+    return this.params.length === PARAM_LENGTH
   }
 }
 
@@ -43,5 +50,9 @@ export class RelativeCCommand extends Command<
     }
     this.result = result
     return result
+  }
+
+  validate(): boolean {
+    return this.params.length === PARAM_LENGTH
   }
 }

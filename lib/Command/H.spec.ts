@@ -19,6 +19,13 @@ describe('AbsoluteHCommand', () => {
     expect(result).toEqual({ x: 100 })
     expect(command.result).toEqual({ x: 100 })
   })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new AbsoluteHCommand('H', [100, 200])
+    }
+    expect(createInvalidInstance).toThrow('Command validate error: H, 100,200')
+  })
 })
 
 describe('RelativeHCommand', () => {
@@ -39,5 +46,12 @@ describe('RelativeHCommand', () => {
     const result = command.marshall()
     expect(result).toEqual({ dx: 100 })
     expect(command.result).toEqual({ dx: 100 })
+  })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new RelativeHCommand('h', [100, 200])
+    }
+    expect(createInvalidInstance).toThrow('Command validate error: h, 100,200')
   })
 })

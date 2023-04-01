@@ -7,6 +7,8 @@ export type RelativeVCommandParseResult = CommandParseResult<'dy'>
 export const ABSOLUTE_V = 'V'
 export const RELATIVE_V = 'v'
 
+const PARAM_LENGTH = 1
+
 export class AbsoluteVCommand extends Command<
   typeof ABSOLUTE_V,
   AbsoluteVCommandParseResult
@@ -17,6 +19,10 @@ export class AbsoluteVCommand extends Command<
     }
     this.result = result
     return result
+  }
+
+  validate(): boolean {
+    return this.params.length === PARAM_LENGTH
   }
 }
 
@@ -30,5 +36,9 @@ export class RelativeVCommand extends Command<
     }
     this.result = result
     return result
+  }
+
+  validate(): boolean {
+    return this.params.length === PARAM_LENGTH
   }
 }

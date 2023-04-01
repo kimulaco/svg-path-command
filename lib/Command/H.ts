@@ -7,6 +7,8 @@ export type RelativeHCommandParseResult = CommandParseResult<'dx'>
 export const ABSOLUTE_H = 'H'
 export const RELATIVE_H = 'h'
 
+const PARAM_LENGTH = 1
+
 export class AbsoluteHCommand extends Command<
   typeof ABSOLUTE_H,
   AbsoluteHCommandParseResult
@@ -17,6 +19,10 @@ export class AbsoluteHCommand extends Command<
     }
     this.result = result
     return result
+  }
+
+  validate(): boolean {
+    return this.params.length === PARAM_LENGTH
   }
 }
 
@@ -30,5 +36,9 @@ export class RelativeHCommand extends Command<
     }
     this.result = result
     return result
+  }
+
+  validate(): boolean {
+    return this.params.length === PARAM_LENGTH
   }
 }

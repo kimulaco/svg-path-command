@@ -37,6 +37,15 @@ describe('AbsoluteCCommand', () => {
     expect(result).toEqual(ABSOLUTE_RESULT)
     expect(command.result).toEqual(ABSOLUTE_RESULT)
   })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new AbsoluteCCommand('C', [100, 200, 300, 400, 500, 600, 700])
+    }
+    expect(createInvalidInstance).toThrow(
+      'Command validate error: C, 100,200,300,400,500,600,700'
+    )
+  })
 })
 
 describe('RelativeCCommand', () => {
@@ -57,5 +66,14 @@ describe('RelativeCCommand', () => {
     const result = command.marshall()
     expect(result).toEqual(RELATIVE_RESULT)
     expect(command.result).toEqual(RELATIVE_RESULT)
+  })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new RelativeCCommand('c', [100, 200, 300, 400, 500, 600, 700])
+    }
+    expect(createInvalidInstance).toThrow(
+      'Command validate error: c, 100,200,300,400,500,600,700'
+    )
   })
 })

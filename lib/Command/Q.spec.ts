@@ -33,6 +33,15 @@ describe('AbsoluteQCommand', () => {
     expect(result).toEqual(ABSOLUTE_RESULT)
     expect(command.result).toEqual(ABSOLUTE_RESULT)
   })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new AbsoluteQCommand('Q', [100, 200, 300, 400, 500])
+    }
+    expect(createInvalidInstance).toThrow(
+      'Command validate error: Q, 100,200,300,400,500'
+    )
+  })
 })
 
 describe('RelativeQCommand', () => {
@@ -53,5 +62,14 @@ describe('RelativeQCommand', () => {
     const result = command.marshall()
     expect(result).toEqual(RELATIVE_RESULT)
     expect(command.result).toEqual(RELATIVE_RESULT)
+  })
+
+  test('Validate error', async () => {
+    const createInvalidInstance = () => {
+      new RelativeQCommand('q', [100, 200, 300, 400, 500])
+    }
+    expect(createInvalidInstance).toThrow(
+      'Command validate error: q, 100,200,300,400,500'
+    )
   })
 })
