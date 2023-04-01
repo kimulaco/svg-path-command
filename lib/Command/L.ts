@@ -6,8 +6,7 @@ export type RelativeLCommandParseResult = CommandParseResult<'dx' | 'dy'>
 
 export const ABSOLUTE_L = 'L'
 export const RELATIVE_L = 'l'
-
-const PARAM_LENGTH = 2
+export const PARAM_LENGTH_L = 2
 
 export class AbsoluteLCommand extends Command<
   typeof ABSOLUTE_L,
@@ -23,7 +22,7 @@ export class AbsoluteLCommand extends Command<
   }
 
   validate(): boolean {
-    return this.params.length === PARAM_LENGTH
+    return this.params.length === PARAM_LENGTH_L
   }
 }
 
@@ -41,6 +40,6 @@ export class RelativeLCommand extends Command<
   }
 
   validate(): boolean {
-    return this.params.length === PARAM_LENGTH
+    return this.params.length === PARAM_LENGTH_L
   }
 }

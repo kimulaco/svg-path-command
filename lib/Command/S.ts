@@ -10,8 +10,7 @@ export type RelativeSCommandParseResult = CommandParseResult<
 
 export const ABSOLUTE_S = 'S'
 export const RELATIVE_S = 's'
-
-const PARAM_LENGTH = 4
+export const PARAM_LENGTH_S = 4
 
 export class AbsoluteSCommand extends Command<
   typeof ABSOLUTE_S,
@@ -29,7 +28,7 @@ export class AbsoluteSCommand extends Command<
   }
 
   validate(): boolean {
-    return this.params.length === PARAM_LENGTH
+    return this.params.length === PARAM_LENGTH_S
   }
 }
 
@@ -49,6 +48,6 @@ export class RelativeSCommand extends Command<
   }
 
   validate(): boolean {
-    return this.params.length === PARAM_LENGTH
+    return this.params.length === PARAM_LENGTH_S
   }
 }

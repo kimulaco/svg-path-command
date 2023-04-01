@@ -6,8 +6,7 @@ export type RelativeMCommandParseResult = CommandParseResult<'dx' | 'dy'>
 
 export const ABSOLUTE_M = 'M'
 export const RELATIVE_M = 'm'
-
-const PARAM_LENGTH = 2
+export const PARAM_LENGTH_M = 2
 
 export class AbsoluteMCommand extends Command<
   typeof ABSOLUTE_M,
@@ -23,7 +22,7 @@ export class AbsoluteMCommand extends Command<
   }
 
   validate(): boolean {
-    return this.params.length === PARAM_LENGTH
+    return this.params.length === PARAM_LENGTH_M
   }
 }
 
@@ -41,6 +40,6 @@ export class RelativeMCommand extends Command<
   }
 
   validate(): boolean {
-    return this.params.length === PARAM_LENGTH
+    return this.params.length === PARAM_LENGTH_M
   }
 }

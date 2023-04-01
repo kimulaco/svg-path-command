@@ -6,8 +6,7 @@ export type RelativeTCommandParseResult = CommandParseResult<'dx' | 'dy'>
 
 export const ABSOLUTE_T = 'T'
 export const RELATIVE_T = 't'
-
-const PARAM_LENGTH = 2
+export const PARAM_LENGTH_T = 2
 
 export class AbsoluteTCommand extends Command<
   typeof ABSOLUTE_T,
@@ -23,7 +22,7 @@ export class AbsoluteTCommand extends Command<
   }
 
   validate(): boolean {
-    return this.params.length === PARAM_LENGTH
+    return this.params.length === PARAM_LENGTH_T
   }
 }
 
@@ -41,6 +40,6 @@ export class RelativeTCommand extends Command<
   }
 
   validate(): boolean {
-    return this.params.length === PARAM_LENGTH
+    return this.params.length === PARAM_LENGTH_T
   }
 }
