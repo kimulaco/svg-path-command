@@ -118,50 +118,50 @@ export const splitCommand = (
   }
 }
 
-export const parseCommand = (commandString: string): CommandType => {
+export const parseCommand = (commandString: string): CommandType[] => {
   const { command, params } = splitCommand(commandString)
 
   switch (command) {
     case ABSOLUTE_A:
-      return new AbsoluteACommand(command, params)
+      return [new AbsoluteACommand(command, params)]
     case RELATIVE_A:
-      return new RelativeACommand(command, params)
+      return [new RelativeACommand(command, params)]
     case ABSOLUTE_C:
-      return new AbsoluteCCommand(command, params)
+      return [new AbsoluteCCommand(command, params)]
     case RELATIVE_C:
-      return new RelativeCCommand(command, params)
+      return [new RelativeCCommand(command, params)]
     case ABSOLUTE_H:
-      return new AbsoluteHCommand(command, params)
+      return [new AbsoluteHCommand(command, params)]
     case RELATIVE_H:
-      return new RelativeHCommand(command, params)
+      return [new RelativeHCommand(command, params)]
     case ABSOLUTE_L:
-      return new AbsoluteLCommand(command, params)
+      return [new AbsoluteLCommand(command, params)]
     case RELATIVE_L:
-      return new RelativeLCommand(command, params)
+      return [new RelativeLCommand(command, params)]
     case ABSOLUTE_M:
-      return new AbsoluteMCommand(command, params)
+      return [new AbsoluteMCommand(command, params)]
     case RELATIVE_M:
-      return new RelativeMCommand(command, params)
+      return [new RelativeMCommand(command, params)]
     case ABSOLUTE_Q:
-      return new AbsoluteQCommand(command, params)
+      return [new AbsoluteQCommand(command, params)]
     case RELATIVE_Q:
-      return new RelativeQCommand(command, params)
+      return [new RelativeQCommand(command, params)]
     case ABSOLUTE_S:
-      return new AbsoluteSCommand(command, params)
+      return [new AbsoluteSCommand(command, params)]
     case RELATIVE_S:
-      return new RelativeSCommand(command, params)
+      return [new RelativeSCommand(command, params)]
     case ABSOLUTE_T:
-      return new AbsoluteTCommand(command, params)
+      return [new AbsoluteTCommand(command, params)]
     case RELATIVE_T:
-      return new RelativeTCommand(command, params)
+      return [new RelativeTCommand(command, params)]
     case ABSOLUTE_V:
-      return new AbsoluteVCommand(command, params)
+      return [new AbsoluteVCommand(command, params)]
     case RELATIVE_V:
-      return new RelativeVCommand(command, params)
+      return [new RelativeVCommand(command, params)]
     case ABSOLUTE_Z:
-      return new AbsoluteZCommand(command, params)
+      return [new AbsoluteZCommand(command, params)]
     case RELATIVE_Z:
-      return new RelativeZCommand(command, params)
+      return [new RelativeZCommand(command, params)]
     default:
       throw new ParserError(`Unknown command: ${commandString}`)
   }

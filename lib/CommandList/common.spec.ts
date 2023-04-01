@@ -65,141 +65,141 @@ describe('splitCommand', () => {
 describe('parseCommand', () => {
   describe('AbsoluteACommand', () => {
     test('A100,200 0 1 300,400', async () => {
-      const command = parseCommand('A100,200 0 1 300,400')
-      expect(command instanceof AbsoluteACommand).toBeTruthy()
+      const commands = parseCommand('A100,200 0 1 300,400')
+      expect(commands[0] instanceof AbsoluteACommand).toBeTruthy()
     })
   })
 
   describe('RelativeACommand', () => {
     test('a100,200 0 1 300,400', async () => {
-      const command = parseCommand('a100,200 0 1 300,400')
-      expect(command instanceof RelativeACommand).toBeTruthy()
+      const commands = parseCommand('a100,200 0 1 300,400')
+      expect(commands[0] instanceof RelativeACommand).toBeTruthy()
     })
   })
 
   describe('AbsoluteCCommand', () => {
     test('C100,200 300,400 500,600', async () => {
-      const command = parseCommand('C100,200 300,400 500,600')
-      expect(command instanceof AbsoluteCCommand).toBeTruthy()
+      const commands = parseCommand('C100,200 300,400 500,600')
+      expect(commands[0] instanceof AbsoluteCCommand).toBeTruthy()
     })
   })
 
   describe('RelativeCCommand', () => {
     test('c100,200 300,400 500,600', async () => {
-      const command = parseCommand('c100,200 300,400 500,600')
-      expect(command instanceof RelativeCCommand).toBeTruthy()
+      const commands = parseCommand('c100,200 300,400 500,600')
+      expect(commands[0] instanceof RelativeCCommand).toBeTruthy()
     })
   })
 
   describe('AbsoluteHCommand', () => {
     test('H100', async () => {
-      const command = parseCommand('H100')
-      expect(command instanceof AbsoluteHCommand).toBeTruthy()
+      const commands = parseCommand('H100')
+      expect(commands[0] instanceof AbsoluteHCommand).toBeTruthy()
     })
   })
 
   describe('RelativeHCommand', () => {
     test('h100', async () => {
-      const command = parseCommand('h100')
-      expect(command instanceof RelativeHCommand).toBeTruthy()
+      const commands = parseCommand('h100')
+      expect(commands[0] instanceof RelativeHCommand).toBeTruthy()
     })
   })
 
   describe('AbsoluteLCommand', () => {
     test('L100,100', async () => {
-      const command = parseCommand('L100,100')
-      expect(command instanceof AbsoluteLCommand).toBeTruthy()
+      const commands = parseCommand('L100,100')
+      expect(commands[0] instanceof AbsoluteLCommand).toBeTruthy()
     })
   })
 
   describe('RelativeLCommand', () => {
     test('l100,100', async () => {
-      const command = parseCommand('l100,100')
-      expect(command instanceof RelativeLCommand).toBeTruthy()
+      const commands = parseCommand('l100,100')
+      expect(commands[0] instanceof RelativeLCommand).toBeTruthy()
     })
   })
 
   describe('AbsoluteMCommand', () => {
     test('M100,100', async () => {
-      const command = parseCommand('M100,100')
-      expect(command instanceof AbsoluteMCommand).toBeTruthy()
+      const commands = parseCommand('M100,100')
+      expect(commands[0] instanceof AbsoluteMCommand).toBeTruthy()
     })
   })
 
   describe('RelativeMCommand', () => {
     test('m100,100', async () => {
-      const command = parseCommand('m100,100')
-      expect(command instanceof RelativeMCommand).toBeTruthy()
+      const commands = parseCommand('m100,100')
+      expect(commands[0] instanceof RelativeMCommand).toBeTruthy()
     })
   })
 
   describe('AbsoluteQCommand', () => {
     test('Q100,200 300,400', async () => {
-      const command = parseCommand('Q100,200 300,400')
-      expect(command instanceof AbsoluteQCommand).toBeTruthy()
+      const commands = parseCommand('Q100,200 300,400')
+      expect(commands[0] instanceof AbsoluteQCommand).toBeTruthy()
     })
   })
 
   describe('RelativeQCommand', () => {
     test('q100,200 300,400', async () => {
-      const command = parseCommand('q100,200 300,400')
-      expect(command instanceof RelativeQCommand).toBeTruthy()
+      const commands = parseCommand('q100,200 300,400')
+      expect(commands[0] instanceof RelativeQCommand).toBeTruthy()
     })
   })
 
   describe('AbsoluteSCommand', () => {
     test('S100,200 300,400', async () => {
-      const command = parseCommand('S100,200 300,400')
-      expect(command instanceof AbsoluteSCommand).toBeTruthy()
+      const commands = parseCommand('S100,200 300,400')
+      expect(commands[0] instanceof AbsoluteSCommand).toBeTruthy()
     })
   })
 
   describe('RelativeSCommand', () => {
     test('s100,200 300,400', async () => {
-      const command = parseCommand('s100,200 300,400')
-      expect(command instanceof RelativeSCommand).toBeTruthy()
+      const commands = parseCommand('s100,200 300,400')
+      expect(commands[0] instanceof RelativeSCommand).toBeTruthy()
     })
   })
 
   describe('AbsoluteTCommand', () => {
     test('T100,100', async () => {
-      const command = parseCommand('T100,100')
-      expect(command instanceof AbsoluteTCommand).toBeTruthy()
+      const commands = parseCommand('T100,100')
+      expect(commands[0] instanceof AbsoluteTCommand).toBeTruthy()
     })
   })
 
   describe('RelativeTCommand', () => {
     test('t100,100', async () => {
-      const command = parseCommand('t100,100')
-      expect(command instanceof RelativeTCommand).toBeTruthy()
+      const commands = parseCommand('t100,100')
+      expect(commands[0] instanceof RelativeTCommand).toBeTruthy()
     })
   })
 
   describe('AbsoluteVCommand', () => {
     test('V100', async () => {
-      const command = parseCommand('V100')
-      expect(command instanceof AbsoluteVCommand).toBeTruthy()
+      const commands = parseCommand('V100')
+      expect(commands[0] instanceof AbsoluteVCommand).toBeTruthy()
     })
   })
 
   describe('RelativeVCommand', () => {
     test('v100', async () => {
-      const command = parseCommand('v100')
-      expect(command instanceof RelativeVCommand).toBeTruthy()
+      const commands = parseCommand('v100')
+      expect(commands[0] instanceof RelativeVCommand).toBeTruthy()
     })
   })
 
   describe('AbsoluteZCommand', () => {
     test('Z', async () => {
-      const command = parseCommand('Z')
-      expect(command instanceof AbsoluteZCommand).toBeTruthy()
+      const commands = parseCommand('Z')
+      expect(commands[0] instanceof AbsoluteZCommand).toBeTruthy()
     })
   })
 
   describe('RelativeZCommand', () => {
     test('z', async () => {
-      const command = parseCommand('z')
-      expect(command instanceof RelativeZCommand).toBeTruthy()
+      const commands = parseCommand('z')
+      expect(commands[0] instanceof RelativeZCommand).toBeTruthy()
     })
   })
 
