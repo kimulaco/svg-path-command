@@ -373,5 +373,15 @@ describe('parseCommand', () => {
     test('Unknown command', async () => {
       expect(() => parseCommand('X100')).toThrow('Unknown command: X100')
     })
+
+    test('Invalid command: L100,200,300', async () => {
+      expect(() => parseCommand('L100,200,300')).toThrow(
+        'Invalid command: L100,200,300'
+      )
+    })
+
+    test('Invalid command: Z100', async () => {
+      expect(() => parseCommand('Z100')).toThrow('Invalid command: Z100')
+    })
   })
 })

@@ -263,17 +263,17 @@ export const parseCommand = (commandString: string): CommandType[] => {
 
   if (paramLength === 0) {
     if (params.length !== 0) {
-      throw new ParserError(`Invalid command: ${commandString}}`)
+      throw new ParserError(`Invalid command: ${commandString}`)
     }
 
     return [new CommandClass(_command as never, params)]
   }
 
   if (params.length % paramLength !== 0) {
-    throw new ParserError(`Invalid command: ${commandString}}`)
+    throw new ParserError(`Invalid command: ${commandString}`)
   }
 
-  const commandLength = params.length / paramLength || 1
+  const commandLength = params.length / paramLength
   const commands: CommandType[] = []
 
   for (let i = 0; i < commandLength; i++) {
