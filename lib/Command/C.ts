@@ -10,8 +10,7 @@ export type RelativeCCommandParseResult = CommandParseResult<
 
 export const ABSOLUTE_C = 'C'
 export const RELATIVE_C = 'c'
-
-const PARAM_LENGTH = 6
+export const PARAM_LENGTH_C = 6
 
 export class AbsoluteCCommand extends Command<
   typeof ABSOLUTE_C,
@@ -31,7 +30,7 @@ export class AbsoluteCCommand extends Command<
   }
 
   validate(): boolean {
-    return this.params.length === PARAM_LENGTH
+    return this.params.length === PARAM_LENGTH_C
   }
 }
 
@@ -53,6 +52,6 @@ export class RelativeCCommand extends Command<
   }
 
   validate(): boolean {
-    return this.params.length === PARAM_LENGTH
+    return this.params.length === PARAM_LENGTH_C
   }
 }

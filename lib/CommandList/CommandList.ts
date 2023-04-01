@@ -1,4 +1,4 @@
-import { CommandType, COMMANDS, parseCommand } from './common'
+import { CommandType, COMMANDS, parseCommand } from './core'
 
 export class CommandList {
   commands: CommandType[] = []
@@ -7,13 +7,19 @@ export class CommandList {
     this.parse(command)
   }
 
-  parse(commandString: string): CommandType[] {
-    const _commands = this.splitCommand(commandString).map((_command: string) =>
-      parseCommand(_command)
-    )
-    this.commands = _commands
+  parse(commandString: string) {
+    const _commands: CommandType[] = []
+    const commandStringList = this.splitCommand(commandString)
 
-    return _commands
+    for (const commandString of commandStringList) {
+      const commandList = parseCommand(commandString)
+
+      for (const command of commandList) {
+        _commands.push(command)
+      }
+    }
+
+    this.commands = _commands
   }
 
   private splitCommand(command: string): string[] {

@@ -10,8 +10,7 @@ export type RelativeACommandParseResult = CommandParseResult<
 
 export const ABSOLUTE_A = 'A'
 export const RELATIVE_A = 'a'
-
-const PARAM_LENGTH = 6
+export const PARAM_LENGTH_A = 6
 
 export class AbsoluteACommand extends Command<
   typeof ABSOLUTE_A,
@@ -31,7 +30,7 @@ export class AbsoluteACommand extends Command<
   }
 
   validate(): boolean {
-    return this.params.length === PARAM_LENGTH
+    return this.params.length === PARAM_LENGTH_A
   }
 }
 
@@ -53,6 +52,6 @@ export class RelativeACommand extends Command<
   }
 
   validate(): boolean {
-    return this.params.length === PARAM_LENGTH
+    return this.params.length === PARAM_LENGTH_A
   }
 }
