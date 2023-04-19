@@ -1,6 +1,22 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
-  ]
+  "extends": ["config:base"],
+  "dependencyDashboard": true,
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["jest"],
+      "groupName": "jest",
+      "automerge": false
+    },
+    {
+      "matchPackagePatterns": ["eslint"],
+      "groupName": "eslint",
+      "automerge": false
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    }
+  ],
+  "schedule": ["before 6am on Saturday"]
 }
