@@ -20,6 +20,24 @@ describe('AbsoluteVCommand', () => {
     expect(command.result).toEqual({ y: 100 })
   })
 
+  test('unmarshall()', async () => {
+    const result = command.marshall()
+
+    expect(result).toEqual({ y: 100 })
+
+    command.result = { y: 200 }
+    const params = command.unmarshall()
+
+    expect(params).toEqual([200])
+    expect(command.params).toEqual([200])
+    expect(command.result).toEqual({ y: 200 })
+
+    command.result = undefined
+    expect(() => {
+      command.unmarshall()
+    }).toThrow('Invalid result object')
+  })
+
   test('Validate error', async () => {
     const createInvalidInstance = () => {
       new AbsoluteVCommand('V', [100, 200])
@@ -46,6 +64,24 @@ describe('RelativeVCommand', () => {
     const result = command.marshall()
     expect(result).toEqual({ dy: 100 })
     expect(command.result).toEqual({ dy: 100 })
+  })
+
+  test('unmarshall()', async () => {
+    const result = command.marshall()
+
+    expect(result).toEqual({ dy: 100 })
+
+    command.result = { dy: 200 }
+    const params = command.unmarshall()
+
+    expect(params).toEqual([200])
+    expect(command.params).toEqual([200])
+    expect(command.result).toEqual({ dy: 200 })
+
+    command.result = undefined
+    expect(() => {
+      command.unmarshall()
+    }).toThrow('Invalid result object')
   })
 
   test('Validate error', async () => {
