@@ -9,6 +9,10 @@
   ],
   "author": "kimulaco",
   "license": "MIT",
+  "engines": {
+    "node": ">=16",
+    "npm": ">=8"
+  },
   "files": [
     "dist",
     "types",
