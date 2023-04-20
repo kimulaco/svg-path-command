@@ -61,7 +61,7 @@ export class Command<
   }
 
   unmarshall(): number[] {
-    const params = [...this._params]
+    const params: number[] = []
     this._params = params
 
     return params
