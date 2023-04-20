@@ -1,5 +1,6 @@
 import { Command } from './Command'
 import type { CommandParseResult } from './Command'
+import { ParserError } from '../ParserError'
 
 export type AbsoluteVCommandParseResult = CommandParseResult<'y'>
 export type RelativeVCommandParseResult = CommandParseResult<'dy'>
@@ -20,8 +21,26 @@ export class AbsoluteVCommand extends Command<
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_V
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [result.y]
+    this.params = params
+
+    return params
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_V
+  }
+
+  validateResult(
+    value: AbsoluteVCommandParseResult | undefined
+  ): value is AbsoluteVCommandParseResult {
+    return typeof value?.y === 'number'
   }
 }
 
@@ -37,7 +56,25 @@ export class RelativeVCommand extends Command<
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_V
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [result.dy]
+    this.params = params
+
+    return params
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_V
+  }
+
+  validateResult(
+    value: RelativeVCommandParseResult | undefined
+  ): value is RelativeVCommandParseResult {
+    return typeof value?.dy === 'number'
   }
 }

@@ -1,5 +1,6 @@
 import { Command } from './Command'
 import type { CommandParseResult } from './Command'
+import { ParserError } from '../ParserError'
 
 export type AbsoluteCCommandParseResult = CommandParseResult<
   'x1' | 'y1' | 'x2' | 'y2' | 'x' | 'y'
@@ -29,8 +30,40 @@ export class AbsoluteCCommand extends Command<
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_C
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [
+      result.x1,
+      result.y1,
+      result.x2,
+      result.y2,
+      result.x,
+      result.y,
+    ]
+    this.params = params
+
+    return params
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_C
+  }
+
+  validateResult(
+    value: AbsoluteCCommandParseResult | undefined
+  ): value is AbsoluteCCommandParseResult {
+    return (
+      typeof value?.x1 === 'number' &&
+      typeof value?.y1 === 'number' &&
+      typeof value?.x2 === 'number' &&
+      typeof value?.y2 === 'number' &&
+      typeof value?.x === 'number' &&
+      typeof value?.y === 'number'
+    )
   }
 }
 
@@ -51,7 +84,39 @@ export class RelativeCCommand extends Command<
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_C
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [
+      result.dx1,
+      result.dy1,
+      result.dx2,
+      result.dy2,
+      result.dx,
+      result.dy,
+    ]
+    this.params = params
+
+    return params
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_C
+  }
+
+  validateResult(
+    value: RelativeCCommandParseResult | undefined
+  ): value is RelativeCCommandParseResult {
+    return (
+      typeof value?.dx1 === 'number' &&
+      typeof value?.dy1 === 'number' &&
+      typeof value?.dx2 === 'number' &&
+      typeof value?.dy2 === 'number' &&
+      typeof value?.dx === 'number' &&
+      typeof value?.dy === 'number'
+    )
   }
 }

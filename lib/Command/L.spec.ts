@@ -1,23 +1,44 @@
 import { AbsoluteLCommand, RelativeLCommand } from './L'
 
+const PARAMS = [100, 200]
+const ABSOLUTE_RESULT = { x: 100, y: 200 }
+const RELATIVE_RESULT = { dx: 100, dy: 200 }
+
 describe('AbsoluteLCommand', () => {
   let command: AbsoluteLCommand
 
   beforeAll(() => {
-    command = new AbsoluteLCommand('L', [100, 200])
+    command = new AbsoluteLCommand('L', PARAMS)
   })
 
   test('Create instance', async () => {
     expect(command.command).toBe('L')
-    expect(command.params).toEqual([100, 200])
+    expect(command.params).toEqual(PARAMS)
     expect(command.isRelative).toBe(false)
-    expect(command.result).toEqual({ x: 100, y: 200 })
+    expect(command.result).toEqual(ABSOLUTE_RESULT)
   })
 
   test('marshall()', async () => {
     const result = command.marshall()
-    expect(result).toEqual({ x: 100, y: 200 })
-    expect(command.result).toEqual({ x: 100, y: 200 })
+    expect(result).toEqual(ABSOLUTE_RESULT)
+    expect(command.result).toEqual(ABSOLUTE_RESULT)
+  })
+
+  test('unmarshall()', async () => {
+    command.marshall()
+    expect(command.result).toEqual(ABSOLUTE_RESULT)
+
+    command.result = { x: 200, y: 200 }
+    const params = command.unmarshall()
+
+    expect(params).toEqual([200, 200])
+    expect(command.params).toEqual([200, 200])
+    expect(command.result).toEqual({ x: 200, y: 200 })
+
+    command.result = undefined
+    expect(() => {
+      command.unmarshall()
+    }).toThrow('Invalid result object')
   })
 
   test('Validate error', async () => {
@@ -34,20 +55,37 @@ describe('RelativeLCommand', () => {
   let command: RelativeLCommand
 
   beforeAll(() => {
-    command = new RelativeLCommand('l', [100, 200])
+    command = new RelativeLCommand('l', PARAMS)
   })
 
   test('Create instance', async () => {
     expect(command.command).toBe('l')
-    expect(command.params).toEqual([100, 200])
+    expect(command.params).toEqual(PARAMS)
     expect(command.isRelative).toBe(true)
-    expect(command.result).toEqual({ dx: 100, dy: 200 })
+    expect(command.result).toEqual(RELATIVE_RESULT)
   })
 
   test('marshall()', async () => {
     const result = command.marshall()
-    expect(result).toEqual({ dx: 100, dy: 200 })
-    expect(command.result).toEqual({ dx: 100, dy: 200 })
+    expect(result).toEqual(RELATIVE_RESULT)
+    expect(command.result).toEqual(RELATIVE_RESULT)
+  })
+
+  test('unmarshall()', async () => {
+    command.marshall()
+    expect(command.result).toEqual(RELATIVE_RESULT)
+
+    command.result = { dx: 200, dy: 200 }
+    const params = command.unmarshall()
+
+    expect(params).toEqual([200, 200])
+    expect(command.params).toEqual([200, 200])
+    expect(command.result).toEqual({ dx: 200, dy: 200 })
+
+    command.result = undefined
+    expect(() => {
+      command.unmarshall()
+    }).toThrow('Invalid result object')
   })
 
   test('Validate error', async () => {

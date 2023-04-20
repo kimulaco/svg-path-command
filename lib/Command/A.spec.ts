@@ -38,6 +38,32 @@ describe('AbsoluteACommand', () => {
     expect(command.result).toEqual(ABSOLUTE_RESULT)
   })
 
+  test('unmarshall()', async () => {
+    command.marshall()
+    expect(command.result).toEqual(ABSOLUTE_RESULT)
+
+    const NEW_PARAMS = [500, 600, 1, 0, 700, 800]
+    const NEW_RESULT = {
+      rx: 500,
+      ry: 600,
+      largeArcFlag: 1,
+      sweepFlag: 0,
+      x: 700,
+      y: 800,
+    }
+    command.result = NEW_RESULT
+    const params = command.unmarshall()
+
+    expect(params).toEqual(NEW_PARAMS)
+    expect(command.params).toEqual(NEW_PARAMS)
+    expect(command.result).toEqual(NEW_RESULT)
+
+    command.result = undefined
+    expect(() => {
+      command.unmarshall()
+    }).toThrow('Invalid result object')
+  })
+
   test('Validate error', async () => {
     const createInvalidInstance = () => {
       new AbsoluteACommand('A', [100, 200, 0, 1, 300, 400, 500])
@@ -66,6 +92,32 @@ describe('RelativeACommand', () => {
     const result = command.marshall()
     expect(result).toEqual(RELATIVE_RESULT)
     expect(command.result).toEqual(RELATIVE_RESULT)
+  })
+
+  test('unmarshall()', async () => {
+    command.marshall()
+    expect(command.result).toEqual(RELATIVE_RESULT)
+
+    const NEW_PARAMS = [500, 600, 1, 0, 700, 800]
+    const NEW_RESULT = {
+      rx: 500,
+      ry: 600,
+      largeArcFlag: 1,
+      sweepFlag: 0,
+      dx: 700,
+      dy: 800,
+    }
+    command.result = NEW_RESULT
+    const params = command.unmarshall()
+
+    expect(params).toEqual(NEW_PARAMS)
+    expect(command.params).toEqual(NEW_PARAMS)
+    expect(command.result).toEqual(NEW_RESULT)
+
+    command.result = undefined
+    expect(() => {
+      command.unmarshall()
+    }).toThrow('Invalid result object')
   })
 
   test('Validate error', async () => {

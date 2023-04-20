@@ -40,7 +40,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "watch": "vite build --watch",
-    "test": "jest --verbose --coverage",
+    "test": "jest --coverage",
     "typeCheck": "tsc --noEmit",
     "lint:script": "eslint . --ext .js,.ts",
     "lint:script:fix": "eslint . --ext .js,.ts",

@@ -1,5 +1,6 @@
 import { Command } from './Command'
 import type { CommandParseResult } from './Command'
+import { ParserError } from '../ParserError'
 
 export type AbsoluteQCommandParseResult = CommandParseResult<
   'x1' | 'y1' | 'x' | 'y'
@@ -27,8 +28,31 @@ export class AbsoluteQCommand extends Command<
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_Q
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [result.x1, result.y1, result.x, result.y]
+    this.params = params
+
+    return params
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_Q
+  }
+
+  validateResult(
+    value: AbsoluteQCommandParseResult | undefined
+  ): value is AbsoluteQCommandParseResult {
+    return (
+      typeof value?.x1 === 'number' &&
+      typeof value?.y1 === 'number' &&
+      typeof value?.x === 'number' &&
+      typeof value?.y === 'number'
+    )
   }
 }
 
@@ -47,7 +71,30 @@ export class RelativeQCommand extends Command<
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_Q
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [result.dx1, result.dy1, result.dx, result.dy]
+    this.params = params
+
+    return params
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_Q
+  }
+
+  validateResult(
+    value: RelativeQCommandParseResult | undefined
+  ): value is RelativeQCommandParseResult {
+    return (
+      typeof value?.dx1 === 'number' &&
+      typeof value?.dy1 === 'number' &&
+      typeof value?.dx === 'number' &&
+      typeof value?.dy === 'number'
+    )
   }
 }
