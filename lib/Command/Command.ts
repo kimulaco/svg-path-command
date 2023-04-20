@@ -68,6 +68,10 @@ export class Command<
     return []
   }
 
+  stringify(): string {
+    return this._command + this._params.join(',')
+  }
+
   // TODO: deprecate
   validate(): boolean {
     return this.validateParams(this._params)

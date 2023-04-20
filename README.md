@@ -20,7 +20,6 @@ import { parse } from 'svg-path-command'
 // const { parse } = require('svg-path-command') // If CommonJS
 
 const pathCommand = parse('M2,8 L5,2 L8,8')
-
 console.log(pathCommand.commands)
 /*
 [
@@ -44,6 +43,12 @@ console.log(pathCommand.commands)
   },
 ]
 */
+
+pathCommand.commands[1].updateResult({
+  x: 10,
+  y: 12,
+})
+console.log(pathCommand.stringify()) // 'M2,8 L5,2 L8,8'
 ```
 
 ## License

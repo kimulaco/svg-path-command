@@ -39,3 +39,10 @@ describe('Command', () => {
     expect(command.validateResult({})).toBeTruthy()
   })
 })
+
+describe('Command.stringify()', () => {
+  test('L100,100', async () => {
+    const command = new Command('L', [100, 100])
+    expect(command.stringify()).toBe('L100,100')
+  })
+})
