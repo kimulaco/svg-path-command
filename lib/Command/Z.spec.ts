@@ -25,16 +25,13 @@ describe('AbsoluteZCommand', () => {
 
     expect(result).toEqual({})
 
-    command.result = {}
-    const params = command.unmarshall()
+    command.updateResult({})
 
-    expect(params).toEqual([])
     expect(command.params).toEqual([])
     expect(command.result).toEqual({})
 
-    command.result = undefined
     expect(() => {
-      command.unmarshall()
+      command.updateResult(undefined)
     }).toThrow('Invalid result object')
   })
 
@@ -71,16 +68,13 @@ describe('RelativeZCommand', () => {
 
     expect(result).toEqual({})
 
-    command.result = {}
-    const params = command.unmarshall()
+    command.updateResult({})
 
-    expect(params).toEqual([])
     expect(command.params).toEqual([])
     expect(command.result).toEqual({})
 
-    command.result = undefined
     expect(() => {
-      command.unmarshall()
+      command.updateResult(undefined)
     }).toThrow('Invalid result object')
   })
 

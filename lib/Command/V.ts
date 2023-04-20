@@ -17,7 +17,9 @@ export class AbsoluteVCommand extends Command<
     const result: AbsoluteVCommandParseResult = {
       y: this.params[0],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -28,7 +30,8 @@ export class AbsoluteVCommand extends Command<
 
     const result = { ...this.result }
     const params = [result.y]
-    this.params = params
+
+    this.setParams(params)
 
     return params
   }
@@ -52,7 +55,9 @@ export class RelativeVCommand extends Command<
     const result: RelativeVCommandParseResult = {
       dy: this.params[0],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -63,7 +68,8 @@ export class RelativeVCommand extends Command<
 
     const result = { ...this.result }
     const params = [result.dy]
-    this.params = params
+
+    this.setParams(params)
 
     return params
   }

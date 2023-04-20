@@ -24,7 +24,9 @@ export class AbsoluteSCommand extends Command<
       x: this.params[2],
       y: this.params[3],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -35,7 +37,8 @@ export class AbsoluteSCommand extends Command<
 
     const result = { ...this.result }
     const params = [result.x2, result.y2, result.x, result.y]
-    this.params = params
+
+    this.setParams(params)
 
     return params
   }
@@ -67,7 +70,9 @@ export class RelativeSCommand extends Command<
       dx: this.params[2],
       dy: this.params[3],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -78,7 +83,8 @@ export class RelativeSCommand extends Command<
 
     const result = { ...this.result }
     const params = [result.dx2, result.dy2, result.dx, result.dy]
-    this.params = params
+
+    this.setParams(params)
 
     return params
   }

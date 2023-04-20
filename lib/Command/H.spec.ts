@@ -25,17 +25,13 @@ describe('AbsoluteHCommand', () => {
 
     expect(result).toEqual({ x: 100 })
 
-    command.result = { x: 200 }
-    const params = command.unmarshall()
+    command.updateResult({ x: 200 })
 
-    expect(params).toEqual([200])
     expect(command.params).toEqual([200])
     expect(command.result).toEqual({ x: 200 })
 
-    command.result = undefined
-
     expect(() => {
-      command.unmarshall()
+      command.updateResult(undefined)
     }).toThrow('Invalid result object')
   })
 
@@ -71,16 +67,13 @@ describe('RelativeHCommand', () => {
 
     expect(result).toEqual({ dx: 100 })
 
-    command.result = { dx: 200 }
-    const params = command.unmarshall()
+    command.updateResult({ dx: 200 })
 
-    expect(params).toEqual([200])
     expect(command.params).toEqual([200])
     expect(command.result).toEqual({ dx: 200 })
 
-    command.result = undefined
     expect(() => {
-      command.unmarshall()
+      command.updateResult(undefined)
     }).toThrow('Invalid result object')
   })
 

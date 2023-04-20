@@ -18,7 +18,9 @@ export class AbsoluteTCommand extends Command<
       x: this.params[0],
       y: this.params[1],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -29,7 +31,8 @@ export class AbsoluteTCommand extends Command<
 
     const result = { ...this.result }
     const params = [result.x, result.y]
-    this.params = params
+
+    this.setParams(params)
 
     return params
   }
@@ -54,7 +57,9 @@ export class RelativeTCommand extends Command<
       dx: this.params[0],
       dy: this.params[1],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -65,7 +70,8 @@ export class RelativeTCommand extends Command<
 
     const result = { ...this.result }
     const params = [result.dx, result.dy]
-    this.params = params
+
+    this.setParams(params)
 
     return params
   }

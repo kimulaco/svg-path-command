@@ -51,16 +51,13 @@ describe('AbsoluteACommand', () => {
       x: 700,
       y: 800,
     }
-    command.result = NEW_RESULT
-    const params = command.unmarshall()
+    command.updateResult(NEW_RESULT)
 
-    expect(params).toEqual(NEW_PARAMS)
     expect(command.params).toEqual(NEW_PARAMS)
     expect(command.result).toEqual(NEW_RESULT)
 
-    command.result = undefined
     expect(() => {
-      command.unmarshall()
+      command.updateResult(undefined)
     }).toThrow('Invalid result object')
   })
 
@@ -107,16 +104,13 @@ describe('RelativeACommand', () => {
       dx: 700,
       dy: 800,
     }
-    command.result = NEW_RESULT
-    const params = command.unmarshall()
+    command.updateResult(NEW_RESULT)
 
-    expect(params).toEqual(NEW_PARAMS)
     expect(command.params).toEqual(NEW_PARAMS)
     expect(command.result).toEqual(NEW_RESULT)
 
-    command.result = undefined
     expect(() => {
-      command.unmarshall()
+      command.updateResult(undefined)
     }).toThrow('Invalid result object')
   })
 
