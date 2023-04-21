@@ -26,7 +26,9 @@ export class AbsoluteCCommand extends Command<
       x: this.params[4],
       y: this.params[5],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -44,7 +46,8 @@ export class AbsoluteCCommand extends Command<
       result.x,
       result.y,
     ]
-    this.params = params
+
+    this.setParams(params)
 
     return params
   }
@@ -80,7 +83,9 @@ export class RelativeCCommand extends Command<
       dx: this.params[4],
       dy: this.params[5],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -98,7 +103,8 @@ export class RelativeCCommand extends Command<
       result.dx,
       result.dy,
     ]
-    this.params = params
+
+    this.setParams(params)
 
     return params
   }

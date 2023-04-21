@@ -9,7 +9,9 @@ export class CommandList {
 
   parse(commandString: string) {
     const _commands: CommandType[] = []
-    const commandStringList = this.splitCommand(commandString)
+    const commandStringList = commandString.split(
+      new RegExp(`(?=${COMMANDS.join('|')})`, 'g')
+    )
 
     for (const commandString of commandStringList) {
       const commandList = parseCommand(commandString)
@@ -22,7 +24,7 @@ export class CommandList {
     this.commands = _commands
   }
 
-  private splitCommand(command: string): string[] {
-    return command.split(new RegExp(`(?=${COMMANDS.join('|')})`, 'g'))
+  stringify(): string {
+    return this.commands.map((command) => command.stringify()).join('')
   }
 }

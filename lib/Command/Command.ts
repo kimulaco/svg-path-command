@@ -38,33 +38,38 @@ export class Command<
     return this._params
   }
 
-  set params(value: number[]) {
-    if (!this.validateParams(value)) {
-      throw new ParserError('Invalid params array')
-    }
-
-    this._params = value
-  }
-
   get result(): Result | undefined {
     return this._result
   }
 
-  set result(value: Result | undefined) {
-    this._result = value
+  protected setParams(value: number[]) {
+    this._params = value
+  }
+
+  protected setResult(result: Result | undefined) {
+    this._result = result
+  }
+
+  updateParams(params: number[]) {
+    this.setParams(params)
+    this.marshall()
+  }
+
+  updateResult(result: Result | undefined) {
+    this.setResult(result)
+    this.unmarshall()
   }
 
   marshall(): Result | undefined {
-    const result: Result | undefined = undefined
-    this._result = result
-    return result
+    return undefined
   }
 
   unmarshall(): number[] {
-    const params: number[] = []
-    this._params = params
+    return []
+  }
 
-    return params
+  stringify(): string {
+    return this._command + this._params.join(',')
   }
 
   // TODO: deprecate

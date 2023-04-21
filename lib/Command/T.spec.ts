@@ -28,16 +28,13 @@ describe('AbsoluteTCommand', () => {
     command.marshall()
     expect(command.result).toEqual(ABSOLUTE_RESULT)
 
-    command.result = { x: 200, y: 200 }
-    const params = command.unmarshall()
+    command.updateResult({ x: 200, y: 200 })
 
-    expect(params).toEqual([200, 200])
     expect(command.params).toEqual([200, 200])
     expect(command.result).toEqual({ x: 200, y: 200 })
 
-    command.result = undefined
     expect(() => {
-      command.unmarshall()
+      command.updateResult(undefined)
     }).toThrow('Invalid result object')
   })
 
@@ -75,16 +72,13 @@ describe('RelativeTCommand', () => {
     command.marshall()
     expect(command.result).toEqual(RELATIVE_RESULT)
 
-    command.result = { dx: 200, dy: 200 }
-    const params = command.unmarshall()
+    command.updateResult({ dx: 200, dy: 200 })
 
-    expect(params).toEqual([200, 200])
     expect(command.params).toEqual([200, 200])
     expect(command.result).toEqual({ dx: 200, dy: 200 })
 
-    command.result = undefined
     expect(() => {
-      command.unmarshall()
+      command.updateResult(undefined)
     }).toThrow('Invalid result object')
   })
 

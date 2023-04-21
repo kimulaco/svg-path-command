@@ -17,7 +17,9 @@ export class AbsoluteHCommand extends Command<
     const result: AbsoluteHCommandParseResult = {
       x: this.params[0],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -28,7 +30,8 @@ export class AbsoluteHCommand extends Command<
 
     const result = { ...this.result }
     const params = [result.x]
-    this.params = params
+
+    this.setParams(params)
 
     return params
   }
@@ -52,7 +55,9 @@ export class RelativeHCommand extends Command<
     const result: RelativeHCommandParseResult = {
       dx: this.params[0],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -63,7 +68,8 @@ export class RelativeHCommand extends Command<
 
     const result = { ...this.result }
     const params = [result.dx]
-    this.params = params
+
+    this.setParams(params)
 
     return params
   }

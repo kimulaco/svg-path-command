@@ -45,16 +45,14 @@ describe('AbsoluteSCommand', () => {
       x: 700,
       y: 800,
     }
-    command.result = NEW_RESULT
-    const params = command.unmarshall()
 
-    expect(params).toEqual(NEW_PARAMS)
+    command.updateResult(NEW_RESULT)
+
     expect(command.params).toEqual(NEW_PARAMS)
     expect(command.result).toEqual(NEW_RESULT)
 
-    command.result = undefined
     expect(() => {
-      command.unmarshall()
+      command.updateResult(undefined)
     }).toThrow('Invalid result object')
   })
 
@@ -99,16 +97,14 @@ describe('RelativeSCommand', () => {
       dx: 700,
       dy: 800,
     }
-    command.result = NEW_RESULT
-    const params = command.unmarshall()
 
-    expect(params).toEqual(NEW_PARAMS)
+    command.updateResult(NEW_RESULT)
+
     expect(command.params).toEqual(NEW_PARAMS)
     expect(command.result).toEqual(NEW_RESULT)
 
-    command.result = undefined
     expect(() => {
-      command.unmarshall()
+      command.updateResult(undefined)
     }).toThrow('Invalid result object')
   })
 

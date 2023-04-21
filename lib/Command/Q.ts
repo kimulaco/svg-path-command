@@ -24,7 +24,9 @@ export class AbsoluteQCommand extends Command<
       x: this.params[2],
       y: this.params[3],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -35,7 +37,8 @@ export class AbsoluteQCommand extends Command<
 
     const result = { ...this.result }
     const params = [result.x1, result.y1, result.x, result.y]
-    this.params = params
+
+    this.setParams(params)
 
     return params
   }
@@ -67,7 +70,9 @@ export class RelativeQCommand extends Command<
       dx: this.params[2],
       dy: this.params[3],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -78,7 +83,8 @@ export class RelativeQCommand extends Command<
 
     const result = { ...this.result }
     const params = [result.dx1, result.dy1, result.dx, result.dy]
-    this.params = params
+
+    this.setParams(params)
 
     return params
   }

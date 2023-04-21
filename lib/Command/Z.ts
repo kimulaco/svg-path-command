@@ -14,7 +14,9 @@ export class AbsoluteZCommand extends Command<
 > {
   marshall(): AbsoluteZCommandParseResult {
     const result: AbsoluteZCommandParseResult = {}
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -23,7 +25,7 @@ export class AbsoluteZCommand extends Command<
       throw new ParserError('Invalid result object')
     }
 
-    this.params = []
+    this.updateParams([])
 
     return []
   }
@@ -45,7 +47,9 @@ export class RelativeZCommand extends Command<
 > {
   marshall(): RelativeZCommandParseResult {
     const result: RelativeZCommandParseResult = {}
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
@@ -54,7 +58,7 @@ export class RelativeZCommand extends Command<
       throw new ParserError('Invalid result object')
     }
 
-    this.params = []
+    this.updateParams([])
 
     return []
   }

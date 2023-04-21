@@ -25,16 +25,13 @@ describe('AbsoluteVCommand', () => {
 
     expect(result).toEqual({ y: 100 })
 
-    command.result = { y: 200 }
-    const params = command.unmarshall()
+    command.updateResult({ y: 200 })
 
-    expect(params).toEqual([200])
     expect(command.params).toEqual([200])
     expect(command.result).toEqual({ y: 200 })
 
-    command.result = undefined
     expect(() => {
-      command.unmarshall()
+      command.updateResult(undefined)
     }).toThrow('Invalid result object')
   })
 
@@ -71,16 +68,13 @@ describe('RelativeVCommand', () => {
 
     expect(result).toEqual({ dy: 100 })
 
-    command.result = { dy: 200 }
-    const params = command.unmarshall()
+    command.updateResult({ dy: 200 })
 
-    expect(params).toEqual([200])
     expect(command.params).toEqual([200])
     expect(command.result).toEqual({ dy: 200 })
 
-    command.result = undefined
     expect(() => {
-      command.unmarshall()
+      command.updateResult(undefined)
     }).toThrow('Invalid result object')
   })
 
