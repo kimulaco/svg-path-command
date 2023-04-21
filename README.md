@@ -48,7 +48,7 @@ pathCommand.commands[1].updateResult({
   x: 10,
   y: 12,
 })
-console.log(pathCommand.stringify()) // 'M2,8 L5,2 L8,8'
+console.log(pathCommand.stringify()) // 'M2,8 L10,12 L8,8'
 ```
 
 ## License
