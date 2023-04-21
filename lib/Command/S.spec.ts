@@ -34,6 +34,28 @@ describe('AbsoluteSCommand', () => {
     expect(command.result).toEqual(ABSOLUTE_RESULT)
   })
 
+  test('unmarshall()', async () => {
+    command.marshall()
+    expect(command.result).toEqual(ABSOLUTE_RESULT)
+
+    const NEW_PARAMS = [500, 600, 700, 800]
+    const NEW_RESULT = {
+      x2: 500,
+      y2: 600,
+      x: 700,
+      y: 800,
+    }
+
+    command.updateResult(NEW_RESULT)
+
+    expect(command.params).toEqual(NEW_PARAMS)
+    expect(command.result).toEqual(NEW_RESULT)
+
+    expect(() => {
+      command.updateResult(undefined)
+    }).toThrow('Invalid result object')
+  })
+
   test('Validate error', async () => {
     const createInvalidInstance = () => {
       new AbsoluteSCommand('S', [100, 200, 300, 400, 500])
@@ -62,6 +84,28 @@ describe('RelativeSCommand', () => {
     const result = command.marshall()
     expect(result).toEqual(RELATIVE_RESULT)
     expect(command.result).toEqual(RELATIVE_RESULT)
+  })
+
+  test('unmarshall()', async () => {
+    command.marshall()
+    expect(command.result).toEqual(RELATIVE_RESULT)
+
+    const NEW_PARAMS = [500, 600, 700, 800]
+    const NEW_RESULT = {
+      dx2: 500,
+      dy2: 600,
+      dx: 700,
+      dy: 800,
+    }
+
+    command.updateResult(NEW_RESULT)
+
+    expect(command.params).toEqual(NEW_PARAMS)
+    expect(command.result).toEqual(NEW_RESULT)
+
+    expect(() => {
+      command.updateResult(undefined)
+    }).toThrow('Invalid result object')
   })
 
   test('Validate error', async () => {

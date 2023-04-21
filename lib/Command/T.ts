@@ -1,5 +1,6 @@
 import { Command } from './Command'
 import type { CommandParseResult } from './Command'
+import { ParserError } from '../ParserError'
 
 export type AbsoluteTCommandParseResult = CommandParseResult<'x' | 'y'>
 export type RelativeTCommandParseResult = CommandParseResult<'dx' | 'dy'>
@@ -17,12 +18,33 @@ export class AbsoluteTCommand extends Command<
       x: this.params[0],
       y: this.params[1],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_T
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [result.x, result.y]
+
+    this.setParams(params)
+
+    return params
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_T
+  }
+
+  validateResult(
+    value: AbsoluteTCommandParseResult | undefined
+  ): value is AbsoluteTCommandParseResult {
+    return typeof value?.x === 'number' && typeof value?.y === 'number'
   }
 }
 
@@ -35,11 +57,32 @@ export class RelativeTCommand extends Command<
       dx: this.params[0],
       dy: this.params[1],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_T
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [result.dx, result.dy]
+
+    this.setParams(params)
+
+    return params
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_T
+  }
+
+  validateResult(
+    value: RelativeTCommandParseResult | undefined
+  ): value is RelativeTCommandParseResult {
+    return typeof value?.dx === 'number' && typeof value?.dy === 'number'
   }
 }

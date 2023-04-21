@@ -1,4 +1,5 @@
 import { Command } from './Command'
+import { ParserError } from '../ParserError'
 
 export type AbsoluteZCommandParseResult = Record<string, never>
 export type RelativeZCommandParseResult = Record<string, never>
@@ -13,12 +14,30 @@ export class AbsoluteZCommand extends Command<
 > {
   marshall(): AbsoluteZCommandParseResult {
     const result: AbsoluteZCommandParseResult = {}
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_Z
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    this.updateParams([])
+
+    return []
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_Z
+  }
+
+  validateResult(
+    value: AbsoluteZCommandParseResult | undefined
+  ): value is AbsoluteZCommandParseResult {
+    return typeof value === 'object' && Object.keys(value).length === 0
   }
 }
 
@@ -28,11 +47,29 @@ export class RelativeZCommand extends Command<
 > {
   marshall(): RelativeZCommandParseResult {
     const result: RelativeZCommandParseResult = {}
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_Z
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    this.updateParams([])
+
+    return []
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_Z
+  }
+
+  validateResult(
+    value: AbsoluteZCommandParseResult | undefined
+  ): value is AbsoluteZCommandParseResult {
+    return typeof value === 'object' && Object.keys(value).length === 0
   }
 }

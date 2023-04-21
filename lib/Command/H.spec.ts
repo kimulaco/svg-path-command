@@ -20,11 +20,25 @@ describe('AbsoluteHCommand', () => {
     expect(command.result).toEqual({ x: 100 })
   })
 
+  test('unmarshall()', async () => {
+    const result = command.marshall()
+
+    expect(result).toEqual({ x: 100 })
+
+    command.updateResult({ x: 200 })
+
+    expect(command.params).toEqual([200])
+    expect(command.result).toEqual({ x: 200 })
+
+    expect(() => {
+      command.updateResult(undefined)
+    }).toThrow('Invalid result object')
+  })
+
   test('Validate error', async () => {
-    const createInvalidInstance = () => {
+    expect(() => {
       new AbsoluteHCommand('H', [100, 200])
-    }
-    expect(createInvalidInstance).toThrow('Command validate error: H, 100,200')
+    }).toThrow('Command validate error: H, 100,200')
   })
 })
 
@@ -46,6 +60,21 @@ describe('RelativeHCommand', () => {
     const result = command.marshall()
     expect(result).toEqual({ dx: 100 })
     expect(command.result).toEqual({ dx: 100 })
+  })
+
+  test('unmarshall()', async () => {
+    const result = command.marshall()
+
+    expect(result).toEqual({ dx: 100 })
+
+    command.updateResult({ dx: 200 })
+
+    expect(command.params).toEqual([200])
+    expect(command.result).toEqual({ dx: 200 })
+
+    expect(() => {
+      command.updateResult(undefined)
+    }).toThrow('Invalid result object')
   })
 
   test('Validate error', async () => {

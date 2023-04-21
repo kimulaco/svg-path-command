@@ -1,5 +1,6 @@
 import { Command } from './Command'
 import type { CommandParseResult } from './Command'
+import { ParserError } from '../ParserError'
 
 export type AbsoluteACommandParseResult = CommandParseResult<
   'rx' | 'ry' | 'largeArcFlag' | 'sweepFlag' | 'x' | 'y'
@@ -25,12 +26,47 @@ export class AbsoluteACommand extends Command<
       x: this.params[4],
       y: this.params[5],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_A
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [
+      result.rx,
+      result.ry,
+      result.largeArcFlag,
+      result.sweepFlag,
+      result.x,
+      result.y,
+    ]
+
+    this.setParams(params)
+
+    return params
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_A
+  }
+
+  validateResult(
+    value: AbsoluteACommandParseResult | undefined
+  ): value is AbsoluteACommandParseResult {
+    return (
+      typeof value?.rx === 'number' &&
+      typeof value?.ry === 'number' &&
+      typeof value?.largeArcFlag === 'number' &&
+      typeof value?.sweepFlag === 'number' &&
+      typeof value?.x === 'number' &&
+      typeof value?.y === 'number'
+    )
   }
 }
 
@@ -47,11 +83,46 @@ export class RelativeACommand extends Command<
       dx: this.params[4],
       dy: this.params[5],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_A
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [
+      result.rx,
+      result.ry,
+      result.largeArcFlag,
+      result.sweepFlag,
+      result.dx,
+      result.dy,
+    ]
+
+    this.setParams(params)
+
+    return params
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_A
+  }
+
+  validateResult(
+    value: RelativeACommandParseResult | undefined
+  ): value is RelativeACommandParseResult {
+    return (
+      typeof value?.rx === 'number' &&
+      typeof value?.ry === 'number' &&
+      typeof value?.largeArcFlag === 'number' &&
+      typeof value?.sweepFlag === 'number' &&
+      typeof value?.dx === 'number' &&
+      typeof value?.dy === 'number'
+    )
   }
 }

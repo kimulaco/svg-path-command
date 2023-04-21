@@ -24,6 +24,20 @@ describe('AbsoluteTCommand', () => {
     expect(command.result).toEqual(ABSOLUTE_RESULT)
   })
 
+  test('unmarshall()', async () => {
+    command.marshall()
+    expect(command.result).toEqual(ABSOLUTE_RESULT)
+
+    command.updateResult({ x: 200, y: 200 })
+
+    expect(command.params).toEqual([200, 200])
+    expect(command.result).toEqual({ x: 200, y: 200 })
+
+    expect(() => {
+      command.updateResult(undefined)
+    }).toThrow('Invalid result object')
+  })
+
   test('Validate error', async () => {
     const createInvalidInstance = () => {
       new AbsoluteTCommand('T', [100, 200, 300])
@@ -52,6 +66,20 @@ describe('RelativeTCommand', () => {
     const result = command.marshall()
     expect(result).toEqual(RELATIVE_RESULT)
     expect(command.result).toEqual(RELATIVE_RESULT)
+  })
+
+  test('unmarshall()', async () => {
+    command.marshall()
+    expect(command.result).toEqual(RELATIVE_RESULT)
+
+    command.updateResult({ dx: 200, dy: 200 })
+
+    expect(command.params).toEqual([200, 200])
+    expect(command.result).toEqual({ dx: 200, dy: 200 })
+
+    expect(() => {
+      command.updateResult(undefined)
+    }).toThrow('Invalid result object')
   })
 
   test('Validate error', async () => {

@@ -1,5 +1,6 @@
 import { Command } from './Command'
 import type { CommandParseResult } from './Command'
+import { ParserError } from '../ParserError'
 
 export type AbsoluteSCommandParseResult = CommandParseResult<
   'x2' | 'y2' | 'x' | 'y'
@@ -23,12 +24,38 @@ export class AbsoluteSCommand extends Command<
       x: this.params[2],
       y: this.params[3],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_S
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [result.x2, result.y2, result.x, result.y]
+
+    this.setParams(params)
+
+    return params
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_S
+  }
+
+  validateResult(
+    value: AbsoluteSCommandParseResult | undefined
+  ): value is AbsoluteSCommandParseResult {
+    return (
+      typeof value?.x2 === 'number' &&
+      typeof value?.y2 === 'number' &&
+      typeof value?.x === 'number' &&
+      typeof value?.y === 'number'
+    )
   }
 }
 
@@ -43,11 +70,37 @@ export class RelativeSCommand extends Command<
       dx: this.params[2],
       dy: this.params[3],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_S
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [result.dx2, result.dy2, result.dx, result.dy]
+
+    this.setParams(params)
+
+    return params
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_S
+  }
+
+  validateResult(
+    value: RelativeSCommandParseResult | undefined
+  ): value is RelativeSCommandParseResult {
+    return (
+      typeof value?.dx2 === 'number' &&
+      typeof value?.dy2 === 'number' &&
+      typeof value?.dx === 'number' &&
+      typeof value?.dy === 'number'
+    )
   }
 }

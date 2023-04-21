@@ -1,5 +1,6 @@
 import { Command } from './Command'
 import type { CommandParseResult } from './Command'
+import { ParserError } from '../ParserError'
 
 export type AbsoluteHCommandParseResult = CommandParseResult<'x'>
 export type RelativeHCommandParseResult = CommandParseResult<'dx'>
@@ -16,12 +17,33 @@ export class AbsoluteHCommand extends Command<
     const result: AbsoluteHCommandParseResult = {
       x: this.params[0],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
-  validate(): boolean {
-    return this.params.length === PARAM_LENGTH_H
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [result.x]
+
+    this.setParams(params)
+
+    return params
+  }
+
+  validateParams(value: number[]): boolean {
+    return value.length === PARAM_LENGTH_H
+  }
+
+  validateResult(
+    value: AbsoluteHCommandParseResult | undefined
+  ): value is AbsoluteHCommandParseResult {
+    return typeof value?.x === 'number'
   }
 }
 
@@ -33,11 +55,32 @@ export class RelativeHCommand extends Command<
     const result: RelativeHCommandParseResult = {
       dx: this.params[0],
     }
-    this.result = result
+
+    this.setResult(result)
+
     return result
   }
 
-  validate(): boolean {
+  unmarshall(): number[] {
+    if (!this.validateResult(this.result)) {
+      throw new ParserError('Invalid result object')
+    }
+
+    const result = { ...this.result }
+    const params = [result.dx]
+
+    this.setParams(params)
+
+    return params
+  }
+
+  validateParams(): boolean {
     return this.params.length === PARAM_LENGTH_H
+  }
+
+  validateResult(
+    value: RelativeHCommandParseResult | undefined
+  ): value is RelativeHCommandParseResult {
+    return typeof value?.dx === 'number'
   }
 }

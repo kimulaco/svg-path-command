@@ -7,14 +7,14 @@ export class Command<
   Command extends string,
   Result extends CommandParseResult<string>
 > {
-  command: Command
-  params: number[]
-  isRelative: boolean
-  result?: Result
+  private _command: Command
+  private _params: number[]
+  private _isRelative: boolean
+  private _result?: Result
 
   constructor(command: Command, params: number[]) {
-    this.command = command
-    this.params = params
+    this._command = command
+    this._params = params
 
     if (!this.validate()) {
       throw new ParserError(
@@ -22,17 +22,66 @@ export class Command<
       )
     }
 
-    this.isRelative = !isUpperCase(command)
+    this._isRelative = !isUpperCase(command)
     this.marshall()
   }
 
-  marshall(): Result | undefined {
-    const result: Result | undefined = undefined
-    this.result = result
-    return result
+  get command(): Command {
+    return this._command
   }
 
+  get isRelative(): boolean {
+    return this._isRelative
+  }
+
+  get params(): number[] {
+    return this._params
+  }
+
+  get result(): Result | undefined {
+    return this._result
+  }
+
+  protected setParams(value: number[]) {
+    this._params = value
+  }
+
+  protected setResult(result: Result | undefined) {
+    this._result = result
+  }
+
+  updateParams(params: number[]) {
+    this.setParams(params)
+    this.marshall()
+  }
+
+  updateResult(result: Result | undefined) {
+    this.setResult(result)
+    this.unmarshall()
+  }
+
+  marshall(): Result | undefined {
+    return undefined
+  }
+
+  unmarshall(): number[] {
+    return []
+  }
+
+  stringify(): string {
+    return this._command + this._params.join(',')
+  }
+
+  // TODO: deprecate
   validate(): boolean {
-    return true
+    return this.validateParams(this._params)
+  }
+
+  validateParams(value: number[]): boolean {
+    return Array.isArray(value)
+  }
+
+  validateResult(value: Result | undefined): value is Result {
+    return !!value
   }
 }
