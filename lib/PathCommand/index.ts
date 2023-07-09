@@ -1,3 +1,4 @@
+import { isValidCommandType, isValidPathCommandParams } from './utils/validate'
 import {
   PATH_COMMAND_COMMANDS,
   PATH_COMMAND_SEPARATOR,
@@ -9,6 +10,21 @@ import type {
   PathCommandValue,
   PathCommandSeparator,
 } from './types'
+
+export { isValidCommandType, isValidPathCommandParams }
+
+export {
+  PATH_COMMAND_COMMANDS,
+  PATH_COMMAND_SEPARATOR,
+  PATH_COMMAND_PARAMS_MAP,
+}
+
+export type {
+  CommandTypes,
+  PathCommandParams,
+  PathCommandValue,
+  PathCommandSeparator,
+}
 
 export class PathCommand {
   private _command: CommandTypes
@@ -54,14 +70,15 @@ export class PathCommand {
   }
 
   validate(command: CommandTypes, params: PathCommandParams): void {
-    if (!PATH_COMMAND_COMMANDS.includes(command)) {
+    if (!isValidCommandType(command)) {
       throw new Error(`Invalid command: ${command}`)
     }
 
-    const valueKeys = PATH_COMMAND_PARAMS_MAP[command]
-    if (Array.isArray(valueKeys) && valueKeys.length !== params.length) {
+    if (!isValidPathCommandParams(command, params)) {
       throw new Error(
-        `Invalid params of ${command} command: [${params.join(', ')}]`
+        `Invalid params of ${command} command: [${(
+          params as PathCommandParams
+        ).join(', ')}]`
       )
     }
   }
