@@ -1,1 +1,1 @@
-export { parse } from './parser'
+export { parsePathCommandList as parse } from './parser'
