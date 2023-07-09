@@ -11,14 +11,22 @@ import type {
 } from './types'
 
 export class PathCommand {
-  protected command: CommandTypes
-  protected params: PathCommandParams = []
+  private _command: CommandTypes
+  private _params: PathCommandParams = []
 
   constructor(command: CommandTypes, params: PathCommandParams) {
     this.validate(command, params)
 
-    this.command = command
-    this.params = params
+    this._command = command
+    this._params = params
+  }
+
+  get command(): CommandTypes {
+    return this._command
+  }
+
+  get params(): PathCommandParams {
+    return this._params
   }
 
   get isRelative(): boolean {
@@ -73,6 +81,6 @@ export class PathCommand {
   updateParams(params: PathCommandParams): void {
     this.validate(this.command, params)
 
-    this.params = params
+    this._params = params
   }
 }

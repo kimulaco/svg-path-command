@@ -5,6 +5,7 @@ export type ResolveTest = {
   name: string
   args: [CommandTypes, PathCommandParams]
   beforeTest?: (cmd: PathCommand) => PathCommand
+  data?: Record<string, unknown>
   getters?: Record<string, unknown>
   methods?: Record<string, [unknown, unknown]>
 }
@@ -34,9 +35,18 @@ export const testPathCommand = (title: string, testConfig: TestConfig) => {
               cmd = resolveTest.beforeTest(cmd)
             }
 
+            if (resolveTest.data) {
+              for (const dataName of Object.keys(resolveTest.data)) {
+                const value = resolveTest.data[dataName]
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                expect((cmd as any)[dataName]).toEqual(value)
+              }
+            }
+
             if (resolveTest.getters) {
               for (const getterName of Object.keys(resolveTest.getters)) {
                 const returnValue = resolveTest.getters[getterName]
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 expect((cmd as any)[getterName]).toEqual(returnValue)
               }
             }
@@ -44,6 +54,7 @@ export const testPathCommand = (title: string, testConfig: TestConfig) => {
             if (resolveTest.methods) {
               for (const methodName of Object.keys(resolveTest.methods)) {
                 const [args, returnValue] = resolveTest.methods[methodName]
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 expect((cmd as any)[methodName](args)).toEqual(returnValue)
               }
             }

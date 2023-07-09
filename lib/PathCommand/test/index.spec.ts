@@ -1,10 +1,24 @@
 import { testPathCommand } from './helpers/testPathCommand'
 
+testPathCommand('test for PathCommand constructor', {
+  resolves: [
+    {
+      name: 'sholud set argments to data',
+      args: ['L', [1, 2]],
+      getters: {
+        command: 'L',
+        params: [1, 2],
+      },
+    },
+  ],
+})
+
 testPathCommand('test for PathCommand.validate()', {
   rejects: [
     {
       name: 'sholud usable default separator',
-      args: ['K' as any, [1, 2]], // eslint-disable-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      args: ['K' as any, [1, 2]],
       error: 'Invalid command: K',
     },
   ],
@@ -40,7 +54,8 @@ testPathCommand('test for PathCommand.toString()', {
       name: 'should throw invalid error if invalid separator character',
       args: ['L', [1, 2]],
       beforeTest: (cmd) => {
-        cmd.toString({ separator: '.' as any }) // eslint-disable-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        cmd.toString({ separator: '.' as any })
         return cmd
       },
       error: 'Invalid separator: .',
