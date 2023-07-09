@@ -11,7 +11,7 @@ testPathCommand('test for z command', {
         value: {},
       },
       methods: {
-        toString: [undefined, 'z'] as [unknown, unknown],
+        stringify: [undefined, 'z'] as [unknown, unknown],
       },
     },
   ],
@@ -45,7 +45,7 @@ testPathCommand('test for Z command', {
         value: {},
       },
       methods: {
-        toString: [undefined, 'Z'] as [unknown, unknown],
+        stringify: [undefined, 'Z'] as [unknown, unknown],
       },
     },
   ],

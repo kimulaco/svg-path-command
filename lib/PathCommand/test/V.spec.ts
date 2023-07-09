@@ -13,7 +13,7 @@ testPathCommand('test for v command', {
         },
       },
       methods: {
-        toString: [undefined, 'v 1'] as [unknown, unknown],
+        stringify: [undefined, 'v 1'] as [unknown, unknown],
       },
     },
     {
@@ -31,7 +31,7 @@ testPathCommand('test for v command', {
         },
       },
       methods: {
-        toString: [undefined, 'v 11'] as [unknown, unknown],
+        stringify: [undefined, 'v 11'] as [unknown, unknown],
       },
     },
   ],
@@ -67,7 +67,7 @@ testPathCommand('test for V command', {
         },
       },
       methods: {
-        toString: [undefined, 'V 1'] as [unknown, unknown],
+        stringify: [undefined, 'V 1'] as [unknown, unknown],
       },
     },
     {
@@ -85,7 +85,7 @@ testPathCommand('test for V command', {
         },
       },
       methods: {
-        toString: [undefined, 'V 11'] as [unknown, unknown],
+        stringify: [undefined, 'V 11'] as [unknown, unknown],
       },
     },
   ],

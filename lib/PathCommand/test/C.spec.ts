@@ -18,7 +18,7 @@ testPathCommand('test for c command', {
         },
       },
       methods: {
-        toString: [undefined, 'c 1 2 3 4 5 6'] as [unknown, unknown],
+        stringify: [undefined, 'c 1 2 3 4 5 6'] as [unknown, unknown],
       },
     },
     {
@@ -41,7 +41,7 @@ testPathCommand('test for c command', {
         },
       },
       methods: {
-        toString: [undefined, 'c 11 12 13 14 15 16'] as [unknown, unknown],
+        stringify: [undefined, 'c 11 12 13 14 15 16'] as [unknown, unknown],
       },
     },
   ],
@@ -82,7 +82,7 @@ testPathCommand('test for C command', {
         },
       },
       methods: {
-        toString: [undefined, 'C 1 2 3 4 5 6'] as [unknown, unknown],
+        stringify: [undefined, 'C 1 2 3 4 5 6'] as [unknown, unknown],
       },
     },
     {
@@ -105,7 +105,7 @@ testPathCommand('test for C command', {
         },
       },
       methods: {
-        toString: [undefined, 'C 11 12 13 14 15 16'] as [unknown, unknown],
+        stringify: [undefined, 'C 11 12 13 14 15 16'] as [unknown, unknown],
       },
     },
   ],

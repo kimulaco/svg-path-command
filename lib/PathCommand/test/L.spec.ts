@@ -14,7 +14,7 @@ testPathCommand('test for l command', {
         },
       },
       methods: {
-        toString: [undefined, 'l 1 2'] as [unknown, unknown],
+        stringify: [undefined, 'l 1 2'] as [unknown, unknown],
       },
     },
     {
@@ -33,7 +33,7 @@ testPathCommand('test for l command', {
         },
       },
       methods: {
-        toString: [undefined, 'l 11 12'] as [unknown, unknown],
+        stringify: [undefined, 'l 11 12'] as [unknown, unknown],
       },
     },
   ],
@@ -70,7 +70,7 @@ testPathCommand('test for L command', {
         },
       },
       methods: {
-        toString: [undefined, 'L 1 2'] as [unknown, unknown],
+        stringify: [undefined, 'L 1 2'] as [unknown, unknown],
       },
     },
     {
@@ -89,7 +89,7 @@ testPathCommand('test for L command', {
         },
       },
       methods: {
-        toString: [undefined, 'L 11 12'] as [unknown, unknown],
+        stringify: [undefined, 'L 11 12'] as [unknown, unknown],
       },
     },
   ],

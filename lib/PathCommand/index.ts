@@ -83,7 +83,7 @@ export class PathCommand {
     }
   }
 
-  toString(option?: { separator?: PathCommandSeparator }): string {
+  stringify(option?: { separator?: PathCommandSeparator }): string {
     const separator = option?.separator || ' '
 
     if (!PATH_COMMAND_SEPARATOR.includes(separator)) {

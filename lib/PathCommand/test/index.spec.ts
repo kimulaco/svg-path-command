@@ -24,27 +24,27 @@ testPathCommand('test for PathCommand.validate()', {
   ],
 })
 
-testPathCommand('test for PathCommand.toString()', {
+testPathCommand('test for PathCommand.stringify()', {
   resolves: [
     {
       name: 'sholud usable default separator',
       args: ['L', [1, 2]],
       methods: {
-        toString: [undefined, 'L 1 2'] as [unknown, unknown],
+        stringify: [undefined, 'L 1 2'] as [unknown, unknown],
       },
     },
     {
       name: 'sholud usable space to separator',
       args: ['L', [1, 2]],
       methods: {
-        toString: [{ separator: ' ' }, 'L 1 2'] as [unknown, unknown],
+        stringify: [{ separator: ' ' }, 'L 1 2'] as [unknown, unknown],
       },
     },
     {
       name: 'sholud usable comma to separator',
       args: ['L', [1, 2]],
       methods: {
-        toString: [{ separator: ',' }, 'L 1,2'] as [unknown, unknown],
+        stringify: [{ separator: ',' }, 'L 1,2'] as [unknown, unknown],
       },
     },
   ],
@@ -55,7 +55,7 @@ testPathCommand('test for PathCommand.toString()', {
       args: ['L', [1, 2]],
       beforeTest: (cmd) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        cmd.toString({ separator: '.' as any })
+        cmd.stringify({ separator: '.' as any })
         return cmd
       },
       error: 'Invalid separator: .',

@@ -13,7 +13,7 @@ testPathCommand('test for h command', {
         },
       },
       methods: {
-        toString: [undefined, 'h 1'] as [unknown, unknown],
+        stringify: [undefined, 'h 1'] as [unknown, unknown],
       },
     },
     {
@@ -31,7 +31,7 @@ testPathCommand('test for h command', {
         },
       },
       methods: {
-        toString: [undefined, 'h 11'] as [unknown, unknown],
+        stringify: [undefined, 'h 11'] as [unknown, unknown],
       },
     },
   ],
@@ -67,7 +67,7 @@ testPathCommand('test for H command', {
         },
       },
       methods: {
-        toString: [undefined, 'H 1'] as [unknown, unknown],
+        stringify: [undefined, 'H 1'] as [unknown, unknown],
       },
     },
     {
@@ -85,7 +85,7 @@ testPathCommand('test for H command', {
         },
       },
       methods: {
-        toString: [undefined, 'H 11'] as [unknown, unknown],
+        stringify: [undefined, 'H 11'] as [unknown, unknown],
       },
     },
   ],

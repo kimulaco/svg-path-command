@@ -10,6 +10,6 @@ describe('test for PathCommandList', () => {
       new PathCommand('Z', []),
     ])
     expect(cmdList.commands).toHaveLength(4)
-    expect(cmdList.toString()).toBe('L 1 2 M 3 4 L 5 6 Z')
+    expect(cmdList.stringify()).toBe('L 1 2 M 3 4 L 5 6 Z')
   })
 })

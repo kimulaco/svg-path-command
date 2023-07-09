@@ -7,7 +7,7 @@ export class PathCommandList {
     this.commands = commands
   }
 
-  toString(): string {
-    return this.commands.map((command) => command.toString()).join(' ')
+  stringify(): string {
+    return this.commands.map((command) => command.stringify()).join(' ')
   }
 }
