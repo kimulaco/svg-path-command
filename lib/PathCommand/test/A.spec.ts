@@ -6,8 +6,8 @@ testPathCommand('test for a command', {
       name: 'sholud create instance',
       args: ['a', [1, 2, 3, 4, 5, 6, 7]],
       getters: {
-        isValid: true,
         isRelative: true,
+        params: [1, 2, 3, 4, 5, 6, 7],
         value: {
           rx: 1,
           ry: 2,
@@ -18,20 +18,16 @@ testPathCommand('test for a command', {
           dy: 7,
         },
       },
-      methods: {
-        stringify: [undefined, 'a 1 2 3 4 5 6 7'] as [unknown, unknown],
-      },
     },
     {
-      name: 'sholud update params',
+      name: 'sholud update params by updateParams()',
       args: ['a', [1, 2, 3, 4, 5, 6, 7]],
       beforeTest(cmd) {
         cmd.updateParams([11, 12, 13, 14, 15, 16, 17])
         return cmd
       },
       getters: {
-        isValid: true,
-        isRelative: true,
+        params: [11, 12, 13, 14, 15, 16, 17],
         value: {
           rx: 11,
           ry: 12,
@@ -42,26 +38,76 @@ testPathCommand('test for a command', {
           dy: 17,
         },
       },
-      methods: {
-        stringify: [undefined, 'a 11 12 13 14 15 16 17'] as [unknown, unknown],
+    },
+    {
+      name: 'sholud update params by updateValues()',
+      args: ['a', [1, 2, 3, 4, 5, 6, 7]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          rx: 11,
+          ry: 12,
+          xAxisRotation: 13,
+          largeArcFlag: 14,
+          sweepFlag: 15,
+          dx: 16,
+          dy: 17,
+        })
+        return cmd
+      },
+      getters: {
+        params: [11, 12, 13, 14, 15, 16, 17],
+        value: {
+          rx: 11,
+          ry: 12,
+          xAxisRotation: 13,
+          largeArcFlag: 14,
+          sweepFlag: 15,
+          dx: 16,
+          dy: 17,
+        },
       },
     },
   ],
 
   rejects: [
     {
-      name: 'should throw invalid error if less param of constructor',
+      name: 'should throw invalid error if invalid arguments of constructor',
       args: ['a', [1, 2, 3, 4, 5, 6]],
       error: 'Invalid params of a command: [1, 2, 3, 4, 5, 6]',
     },
     {
-      name: 'should throw invalid error if less param of updateParams',
+      name: 'should throw invalid error if invalid arguments of updateParams()',
       args: ['a', [1, 2, 3, 4, 5, 6, 7]],
       beforeTest(cmd) {
         cmd.updateParams([11, 12, 13, 14, 15, 16])
         return cmd
       },
       error: 'Invalid params of a command: [11, 12, 13, 14, 15, 16]',
+    },
+    {
+      name: 'should throw invalid error if invalid arguments of updateValues()',
+      args: ['a', [1, 2, 3, 4, 5, 6, 7]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          rx: 11,
+          ry: 12,
+          xAxisRotation: 13,
+          largeArcFlag: 14,
+          sweepFlag: 15,
+          x: 16,
+          y: 17,
+        })
+        return cmd
+      },
+      error: `Invalid value of a command: ${JSON.stringify({
+        rx: 11,
+        ry: 12,
+        xAxisRotation: 13,
+        largeArcFlag: 14,
+        sweepFlag: 15,
+        x: 16,
+        y: 17,
+      })}`,
     },
   ],
 })
@@ -72,8 +118,8 @@ testPathCommand('test for A command', {
       name: 'sholud create instance',
       args: ['A', [1, 2, 3, 4, 5, 6, 7]],
       getters: {
-        isValid: true,
         isRelative: false,
+        params: [1, 2, 3, 4, 5, 6, 7],
         value: {
           rx: 1,
           ry: 2,
@@ -84,20 +130,16 @@ testPathCommand('test for A command', {
           y: 7,
         },
       },
-      methods: {
-        stringify: [undefined, 'A 1 2 3 4 5 6 7'] as [unknown, unknown],
-      },
     },
     {
-      name: 'sholud update params',
+      name: 'sholud update params by updateParams()',
       args: ['A', [1, 2, 3, 4, 5, 6, 7]],
       beforeTest(cmd) {
         cmd.updateParams([11, 12, 13, 14, 15, 16, 17])
         return cmd
       },
       getters: {
-        isValid: true,
-        isRelative: false,
+        params: [11, 12, 13, 14, 15, 16, 17],
         value: {
           rx: 11,
           ry: 12,
@@ -108,26 +150,76 @@ testPathCommand('test for A command', {
           y: 17,
         },
       },
-      methods: {
-        stringify: [undefined, 'A 11 12 13 14 15 16 17'] as [unknown, unknown],
+    },
+    {
+      name: 'sholud update params by updateValues()',
+      args: ['A', [1, 2, 3, 4, 5, 6, 7]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          rx: 11,
+          ry: 12,
+          xAxisRotation: 13,
+          largeArcFlag: 14,
+          sweepFlag: 15,
+          x: 16,
+          y: 17,
+        })
+        return cmd
+      },
+      getters: {
+        params: [11, 12, 13, 14, 15, 16, 17],
+        value: {
+          rx: 11,
+          ry: 12,
+          xAxisRotation: 13,
+          largeArcFlag: 14,
+          sweepFlag: 15,
+          x: 16,
+          y: 17,
+        },
       },
     },
   ],
 
   rejects: [
     {
-      name: 'should throw invalid error if less param of constructor',
+      name: 'should throw invalid error if invalid arguments of constructor',
       args: ['A', [1, 2, 3, 4, 5, 6]],
       error: 'Invalid params of A command: [1, 2, 3, 4, 5, 6]',
     },
     {
-      name: 'should throw invalid error if less param of updateParams',
+      name: 'should throw invalid error if invalid arguments of updateParams()',
       args: ['A', [1, 2, 3, 4, 5, 6, 7]],
       beforeTest(cmd) {
         cmd.updateParams([11, 12, 13, 14, 15, 16])
         return cmd
       },
       error: 'Invalid params of A command: [11, 12, 13, 14, 15, 16]',
+    },
+    {
+      name: 'should throw invalid error if invalid arguments of updateValues()',
+      args: ['A', [1, 2, 3, 4, 5, 6, 7]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          rx: 11,
+          ry: 12,
+          xAxisRotation: 13,
+          largeArcFlag: 14,
+          sweepFlag: 15,
+          dx: 16,
+          dy: 17,
+        })
+        return cmd
+      },
+      error: `Invalid value of A command: ${JSON.stringify({
+        rx: 11,
+        ry: 12,
+        xAxisRotation: 13,
+        largeArcFlag: 14,
+        sweepFlag: 15,
+        dx: 16,
+        dy: 17,
+      })}`,
     },
   ],
 })

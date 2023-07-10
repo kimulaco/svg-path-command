@@ -6,50 +6,72 @@ testPathCommand('test for h command', {
       name: 'sholud create instance',
       args: ['h', [1]],
       getters: {
-        isValid: true,
         isRelative: true,
+        params: [1],
         value: {
           dx: 1,
         },
       },
-      methods: {
-        stringify: [undefined, 'h 1'] as [unknown, unknown],
-      },
     },
     {
-      name: 'sholud create instance',
+      name: 'sholud update params by updateParams()',
       args: ['h', [1]],
       beforeTest(cmd) {
         cmd.updateParams([11])
         return cmd
       },
       getters: {
-        isValid: true,
-        isRelative: true,
+        params: [11],
         value: {
           dx: 11,
         },
       },
-      methods: {
-        stringify: [undefined, 'h 11'] as [unknown, unknown],
+    },
+    {
+      name: 'sholud update params by updateValue()',
+      args: ['h', [1]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          dx: 11,
+        })
+        return cmd
+      },
+      getters: {
+        params: [11],
+        value: {
+          dx: 11,
+        },
       },
     },
   ],
 
   rejects: [
     {
-      name: 'should throw invalid error if less param of constructor',
+      name: 'should throw invalid error if invalid arguments of constructor',
       args: ['h', []],
       error: 'Invalid params of h command: []',
     },
     {
-      name: 'should throw invalid error if less param of updateParams',
+      name: 'should throw invalid error if invalid arguments of updateParams()',
       args: ['h', [1]],
       beforeTest(cmd) {
         cmd.updateParams([])
         return cmd
       },
       error: 'Invalid params of h command: []',
+    },
+    {
+      name: 'should throw invalid error if invalid arguments of updateValue()',
+      args: ['h', [1]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          x: 11,
+        })
+        return cmd
+      },
+      error: `Invalid value of h command: ${JSON.stringify({
+        x: 11,
+      })}`,
     },
   ],
 })
@@ -60,50 +82,72 @@ testPathCommand('test for H command', {
       name: 'sholud create instance',
       args: ['H', [1]],
       getters: {
-        isValid: true,
         isRelative: false,
+        params: [1],
         value: {
           x: 1,
         },
       },
-      methods: {
-        stringify: [undefined, 'H 1'] as [unknown, unknown],
-      },
     },
     {
-      name: 'sholud create instance',
+      name: 'sholud update params by updateParams()',
       args: ['H', [1]],
       beforeTest(cmd) {
         cmd.updateParams([11])
         return cmd
       },
       getters: {
-        isValid: true,
-        isRelative: false,
+        params: [11],
         value: {
           x: 11,
         },
       },
-      methods: {
-        stringify: [undefined, 'H 11'] as [unknown, unknown],
+    },
+    {
+      name: 'sholud update params by updateValue()',
+      args: ['H', [1]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          x: 11,
+        })
+        return cmd
+      },
+      getters: {
+        params: [11],
+        value: {
+          x: 11,
+        },
       },
     },
   ],
 
   rejects: [
     {
-      name: 'should throw invalid error if less param of constructor',
+      name: 'should throw invalid error if invalid arguments of constructor',
       args: ['H', []],
       error: 'Invalid params of H command: []',
     },
     {
-      name: 'should throw invalid error if less param of updateParams',
+      name: 'should throw invalid error if invalid arguments of updateParams()',
       args: ['H', [1]],
       beforeTest(cmd) {
         cmd.updateParams([])
         return cmd
       },
       error: 'Invalid params of H command: []',
+    },
+    {
+      name: 'should throw invalid error if invalid arguments of updateValue()',
+      args: ['H', [1]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          dx: 11,
+        })
+        return cmd
+      },
+      error: `Invalid value of H command: ${JSON.stringify({
+        dx: 11,
+      })}`,
     },
   ],
 })

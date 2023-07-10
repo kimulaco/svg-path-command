@@ -6,52 +6,78 @@ testPathCommand('test for m command', {
       name: 'sholud create instance',
       args: ['m', [1, 2]],
       getters: {
-        isValid: true,
         isRelative: true,
+        params: [1, 2],
         value: {
           dx: 1,
           dy: 2,
         },
       },
-      methods: {
-        stringify: [undefined, 'm 1 2'] as [unknown, unknown],
-      },
     },
     {
-      name: 'sholud create instance',
+      name: 'sholud update params by updateParams()',
       args: ['m', [1, 2]],
       beforeTest(cmd) {
         cmd.updateParams([11, 12])
         return cmd
       },
       getters: {
-        isValid: true,
-        isRelative: true,
+        params: [11, 12],
         value: {
           dx: 11,
           dy: 12,
         },
       },
-      methods: {
-        stringify: [undefined, 'm 11 12'] as [unknown, unknown],
+    },
+    {
+      name: 'sholud update params by updateValue()',
+      args: ['m', [1, 2]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          dx: 11,
+          dy: 12,
+        })
+        return cmd
+      },
+      getters: {
+        params: [11, 12],
+        value: {
+          dx: 11,
+          dy: 12,
+        },
       },
     },
   ],
 
   rejects: [
     {
-      name: 'should throw invalid error if less param of constructor',
+      name: 'should throw invalid error if invalid arguments of constructor',
       args: ['m', [1]],
       error: 'Invalid params of m command: [1]',
     },
     {
-      name: 'should throw invalid error if less param of updateParams',
+      name: 'should throw invalid error if invalid arguments of updateParams()',
       args: ['m', [1, 2]],
       beforeTest(cmd) {
         cmd.updateParams([11])
         return cmd
       },
       error: 'Invalid params of m command: [11]',
+    },
+    {
+      name: 'should throw invalid error if invalid arguments of updateValue()',
+      args: ['m', [1, 2]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          x: 11,
+          y: 12,
+        })
+        return cmd
+      },
+      error: `Invalid value of m command: ${JSON.stringify({
+        x: 11,
+        y: 12,
+      })}`,
     },
   ],
 })
@@ -62,52 +88,78 @@ testPathCommand('test for M command', {
       name: 'sholud create instance',
       args: ['M', [1, 2]],
       getters: {
-        isValid: true,
         isRelative: false,
+        params: [1, 2],
         value: {
           x: 1,
           y: 2,
         },
       },
-      methods: {
-        stringify: [undefined, 'M 1 2'] as [unknown, unknown],
-      },
     },
     {
-      name: 'sholud create instance',
+      name: 'sholud update params by updateParams()',
       args: ['M', [1, 2]],
       beforeTest(cmd) {
         cmd.updateParams([11, 12])
         return cmd
       },
       getters: {
-        isValid: true,
-        isRelative: false,
+        params: [11, 12],
         value: {
           x: 11,
           y: 12,
         },
       },
-      methods: {
-        stringify: [undefined, 'M 11 12'] as [unknown, unknown],
+    },
+    {
+      name: 'sholud update params by updateValue()',
+      args: ['M', [1, 2]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          x: 11,
+          y: 12,
+        })
+        return cmd
+      },
+      getters: {
+        params: [11, 12],
+        value: {
+          x: 11,
+          y: 12,
+        },
       },
     },
   ],
 
   rejects: [
     {
-      name: 'should throw invalid error if less param of constructor',
+      name: 'should throw invalid error if invalid arguments of constructor',
       args: ['M', [1]],
       error: 'Invalid params of M command: [1]',
     },
     {
-      name: 'should throw invalid error if less param of updateParams',
+      name: 'should throw invalid error if invalid arguments of updateParams()',
       args: ['M', [1, 2]],
       beforeTest(cmd) {
         cmd.updateParams([11])
         return cmd
       },
       error: 'Invalid params of M command: [11]',
+    },
+    {
+      name: 'should throw invalid error if invalid arguments of updateValue()',
+      args: ['M', [1, 2]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          dx: 11,
+          dy: 12,
+        })
+        return cmd
+      },
+      error: `Invalid value of M command: ${JSON.stringify({
+        dx: 11,
+        dy: 12,
+      })}`,
     },
   ],
 })

@@ -6,30 +6,38 @@ testPathCommand('test for z command', {
       name: 'sholud create instance',
       args: ['z', []],
       getters: {
-        isValid: true,
         isRelative: true,
+        params: [],
         value: {},
-      },
-      methods: {
-        stringify: [undefined, 'z'] as [unknown, unknown],
       },
     },
   ],
 
   rejects: [
     {
-      name: 'should throw invalid error if less param of constructor',
+      name: 'should throw invalid error if invalid arguments of constructor',
       args: ['z', [1]],
       error: 'Invalid params of z command: [1]',
     },
     {
-      name: 'should throw invalid error if less param of updateParams',
+      name: 'should throw invalid error if invalid arguments of updateParams()',
       args: ['z', []],
       beforeTest(cmd) {
         cmd.updateParams([11])
         return cmd
       },
       error: 'Invalid params of z command: [11]',
+    },
+    {
+      name: 'should throw invalid error if invalid arguments of updateValue()',
+      args: ['z', []],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          dx: 11,
+        })
+        return cmd
+      },
+      error: 'Invalid value of z command: {"dx":11}',
     },
   ],
 })
@@ -40,30 +48,38 @@ testPathCommand('test for Z command', {
       name: 'sholud create instance',
       args: ['Z', []],
       getters: {
-        isValid: true,
         isRelative: false,
+        params: [],
         value: {},
-      },
-      methods: {
-        stringify: [undefined, 'Z'] as [unknown, unknown],
       },
     },
   ],
 
   rejects: [
     {
-      name: 'should throw invalid error if less param of constructor',
+      name: 'should throw invalid error if invalid arguments of constructor',
       args: ['Z', [1]],
       error: 'Invalid params of Z command: [1]',
     },
     {
-      name: 'should throw invalid error if less param of updateParams',
+      name: 'should throw invalid error if invalid arguments of updateParams()',
       args: ['Z', []],
       beforeTest(cmd) {
         cmd.updateParams([11])
         return cmd
       },
       error: 'Invalid params of Z command: [11]',
+    },
+    {
+      name: 'should throw invalid error if invalid arguments of updateValue()',
+      args: ['Z', []],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          x: 11,
+        })
+        return cmd
+      },
+      error: 'Invalid value of Z command: {"x":11}',
     },
   ],
 })

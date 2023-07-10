@@ -31,7 +31,7 @@ export class PathCommand {
   private _params: PathCommandParams = []
 
   constructor(command: CommandTypes, params: PathCommandParams) {
-    this.validate(command, params)
+    this.validateParams(command, params)
 
     this._command = command
     this._params = params
@@ -49,15 +49,6 @@ export class PathCommand {
     return this.command === this.command.toLowerCase()
   }
 
-  get isValid(): boolean {
-    try {
-      this.validate(this.command, this.params)
-      return true
-    } catch {
-      return false
-    }
-  }
-
   get value(): PathCommandValue {
     const value: PathCommandValue = {}
 
@@ -69,7 +60,31 @@ export class PathCommand {
     return value
   }
 
-  validate(command: CommandTypes, params: PathCommandParams): void {
+  private convertValueToParams(
+    command: CommandTypes,
+    value: PathCommandValue
+  ): PathCommandParams {
+    const keys = PATH_COMMAND_PARAMS_MAP[command]
+    const error = new Error(
+      `Invalid value of ${command} command: ${JSON.stringify(value)}`
+    )
+
+    if (keys.length !== Object.keys(value).length) {
+      throw error
+    }
+
+    const params: PathCommandParams = []
+    for (const key of keys) {
+      if (!value[key]) {
+        throw error
+      }
+      params.push(value[key])
+    }
+
+    return params
+  }
+
+  validateParams(command: CommandTypes, params: PathCommandParams): void {
     if (!isValidCommandType(command)) {
       throw new Error(`Invalid command: ${command}`)
     }
@@ -96,8 +111,23 @@ export class PathCommand {
   }
 
   updateParams(params: PathCommandParams): void {
-    this.validate(this.command, params)
+    this.validateParams(this.command, params)
 
     this._params = params
+  }
+
+  updateValue(value: PathCommandValue): void {
+    const params = this.convertValueToParams(this.command, value)
+
+    this.validateParams(this.command, params)
+
+    this._params = params
+  }
+
+  updateResult(value: PathCommandValue): void {
+    console.warn(
+      'updateResult is deprecated so will be removed in the future. use updateValue.'
+    )
+    this.updateValue(value)
   }
 }

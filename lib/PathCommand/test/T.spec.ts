@@ -6,52 +6,75 @@ testPathCommand('test for t command', {
       name: 'sholud create instance',
       args: ['t', [1, 2]],
       getters: {
-        isValid: true,
         isRelative: true,
+        params: [1, 2],
         value: {
           dx: 1,
           dy: 2,
         },
       },
-      methods: {
-        stringify: [undefined, 't 1 2'] as [unknown, unknown],
-      },
     },
     {
-      name: 'sholud create instance',
+      name: 'sholud update params by updateParams()',
       args: ['t', [1, 2]],
       beforeTest(cmd) {
         cmd.updateParams([11, 12])
         return cmd
       },
       getters: {
-        isValid: true,
-        isRelative: true,
+        params: [11, 12],
         value: {
           dx: 11,
           dy: 12,
         },
       },
-      methods: {
-        stringify: [undefined, 't 11 12'] as [unknown, unknown],
+    },
+    {
+      name: 'sholud update params by updateValue()',
+      args: ['t', [1, 2]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          dx: 11,
+          dy: 12,
+        })
+        return cmd
+      },
+      getters: {
+        params: [11, 12],
+        value: {
+          dx: 11,
+          dy: 12,
+        },
       },
     },
   ],
 
   rejects: [
     {
-      name: 'should throw invalid error if less param of constructor',
+      name: 'should throw invalid error if invalid arguments of constructor',
       args: ['t', [1]],
       error: 'Invalid params of t command: [1]',
     },
     {
-      name: 'should throw invalid error if less param of updateParams',
+      name: 'should throw invalid error if invalid arguments of updateParams()',
       args: ['t', [1, 2]],
       beforeTest(cmd) {
         cmd.updateParams([11])
         return cmd
       },
       error: 'Invalid params of t command: [11]',
+    },
+    {
+      name: 'should throw invalid error if invalid arguments of updateValue()',
+      args: ['t', [1, 2]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          x: 11,
+          y: 12,
+        })
+        return cmd
+      },
+      error: 'Invalid value of t command: {"x":11,"y":12}',
     },
   ],
 })
@@ -62,52 +85,75 @@ testPathCommand('test for T command', {
       name: 'sholud create instance',
       args: ['T', [1, 2]],
       getters: {
-        isValid: true,
         isRelative: false,
+        params: [1, 2],
         value: {
           x: 1,
           y: 2,
         },
       },
-      methods: {
-        stringify: [undefined, 'T 1 2'] as [unknown, unknown],
-      },
     },
     {
-      name: 'sholud create instance',
+      name: 'sholud update params by updateParams()',
       args: ['T', [1, 2]],
       beforeTest(cmd) {
         cmd.updateParams([11, 12])
         return cmd
       },
       getters: {
-        isValid: true,
-        isRelative: false,
+        params: [11, 12],
         value: {
           x: 11,
           y: 12,
         },
       },
-      methods: {
-        stringify: [undefined, 'T 11 12'] as [unknown, unknown],
+    },
+    {
+      name: 'sholud update params by updateValue()',
+      args: ['T', [1, 2]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          x: 11,
+          y: 12,
+        })
+        return cmd
+      },
+      getters: {
+        params: [11, 12],
+        value: {
+          x: 11,
+          y: 12,
+        },
       },
     },
   ],
 
   rejects: [
     {
-      name: 'should throw invalid error if less param of constructor',
+      name: 'should throw invalid error if invalid arguments of constructor',
       args: ['T', [1]],
       error: 'Invalid params of T command: [1]',
     },
     {
-      name: 'should throw invalid error if less param of updateParams',
+      name: 'should throw invalid error if invalid arguments of updateParams()',
       args: ['T', [1, 2]],
       beforeTest(cmd) {
         cmd.updateParams([11])
         return cmd
       },
       error: 'Invalid params of T command: [11]',
+    },
+    {
+      name: 'should throw invalid error if invalid arguments of updateValue()',
+      args: ['T', [1, 2]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          dx: 11,
+          dy: 12,
+        })
+        return cmd
+      },
+      error: 'Invalid value of T command: {"dx":11,"dy":12}',
     },
   ],
 })

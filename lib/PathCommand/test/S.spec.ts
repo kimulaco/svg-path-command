@@ -6,8 +6,8 @@ testPathCommand('test for s command', {
       name: 'sholud create instance',
       args: ['s', [1, 2, 3, 4]],
       getters: {
-        isValid: true,
         isRelative: true,
+        params: [1, 2, 3, 4],
         value: {
           dx2: 1,
           dy2: 2,
@@ -15,20 +15,16 @@ testPathCommand('test for s command', {
           dy: 4,
         },
       },
-      methods: {
-        stringify: [undefined, 's 1 2 3 4'] as [unknown, unknown],
-      },
     },
     {
-      name: 'sholud create instance',
+      name: 'sholud update params by updateParams()',
       args: ['s', [1, 2, 3, 4]],
       beforeTest(cmd) {
         cmd.updateParams([11, 12, 13, 14])
         return cmd
       },
       getters: {
-        isValid: true,
-        isRelative: true,
+        params: [11, 12, 13, 14],
         value: {
           dx2: 11,
           dy2: 12,
@@ -36,26 +32,59 @@ testPathCommand('test for s command', {
           dy: 14,
         },
       },
-      methods: {
-        stringify: [undefined, 's 11 12 13 14'] as [unknown, unknown],
+    },
+    {
+      name: 'sholud update params by updateValue()',
+      args: ['s', [1, 2, 3, 4]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          dx2: 11,
+          dy2: 12,
+          dx: 13,
+          dy: 14,
+        })
+        return cmd
+      },
+      getters: {
+        params: [11, 12, 13, 14],
+        value: {
+          dx2: 11,
+          dy2: 12,
+          dx: 13,
+          dy: 14,
+        },
       },
     },
   ],
 
   rejects: [
     {
-      name: 'should throw invalid error if less param of constructor',
+      name: 'should throw invalid error if invalid arguments of constructor',
       args: ['s', [1, 2, 3]],
       error: 'Invalid params of s command: [1, 2, 3]',
     },
     {
-      name: 'should throw invalid error if less param of updateParams',
+      name: 'should throw invalid error if invalid arguments of updateParams()',
       args: ['s', [1, 2, 3, 4]],
       beforeTest(cmd) {
         cmd.updateParams([11, 12, 13])
         return cmd
       },
       error: 'Invalid params of s command: [11, 12, 13]',
+    },
+    {
+      name: 'should throw invalid error if invalid arguments of updateValue()',
+      args: ['s', [1, 2, 3, 4]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          dx2: 11,
+          dy2: 12,
+          x: 13,
+          y: 14,
+        })
+        return cmd
+      },
+      error: 'Invalid value of s command: {"dx2":11,"dy2":12,"x":13,"y":14}',
     },
   ],
 })
@@ -66,8 +95,8 @@ testPathCommand('test for S command', {
       name: 'sholud create instance',
       args: ['S', [1, 2, 3, 4]],
       getters: {
-        isValid: true,
         isRelative: false,
+        params: [1, 2, 3, 4],
         value: {
           x2: 1,
           y2: 2,
@@ -75,20 +104,16 @@ testPathCommand('test for S command', {
           y: 4,
         },
       },
-      methods: {
-        stringify: [undefined, 'S 1 2 3 4'] as [unknown, unknown],
-      },
     },
     {
-      name: 'sholud create instance',
+      name: 'sholud update params by updateParams()',
       args: ['S', [1, 2, 3, 4]],
       beforeTest(cmd) {
         cmd.updateParams([11, 12, 13, 14])
         return cmd
       },
       getters: {
-        isValid: true,
-        isRelative: false,
+        params: [11, 12, 13, 14],
         value: {
           x2: 11,
           y2: 12,
@@ -96,26 +121,59 @@ testPathCommand('test for S command', {
           y: 14,
         },
       },
-      methods: {
-        stringify: [undefined, 'S 11 12 13 14'] as [unknown, unknown],
+    },
+    {
+      name: 'sholud update params by updateValue()',
+      args: ['S', [1, 2, 3, 4]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          x2: 11,
+          y2: 12,
+          x: 13,
+          y: 14,
+        })
+        return cmd
+      },
+      getters: {
+        params: [11, 12, 13, 14],
+        value: {
+          x2: 11,
+          y2: 12,
+          x: 13,
+          y: 14,
+        },
       },
     },
   ],
 
   rejects: [
     {
-      name: 'should throw invalid error if less param of constructor',
+      name: 'should throw invalid error if invalid arguments of constructor',
       args: ['S', [1, 2, 3]],
       error: 'Invalid params of S command: [1, 2, 3]',
     },
     {
-      name: 'should throw invalid error if less param of updateParams',
+      name: 'should throw invalid error if invalid arguments of updateParams()',
       args: ['S', [1, 2, 3, 4]],
       beforeTest(cmd) {
         cmd.updateParams([11, 12, 13])
         return cmd
       },
       error: 'Invalid params of S command: [11, 12, 13]',
+    },
+    {
+      name: 'should throw invalid error if invalid arguments of updateValue()',
+      args: ['S', [1, 2, 3, 4]],
+      beforeTest(cmd) {
+        cmd.updateValue({
+          x2: 11,
+          y2: 12,
+          dx: 13,
+          dy: 14,
+        })
+        return cmd
+      },
+      error: 'Invalid value of S command: {"x2":11,"y2":12,"dx":13,"dy":14}',
     },
   ],
 })
