@@ -1,4 +1,4 @@
-import { isValidCommandType, isValidPathCommandParams } from './utils/validate'
+import { isValidCommandType, isValidPathCommandParams } from './utils/'
 import {
   PATH_COMMAND_COMMANDS,
   PATH_COMMAND_SEPARATOR,

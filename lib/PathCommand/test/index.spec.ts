@@ -13,7 +13,7 @@ testPathCommand('test for PathCommand constructor', {
   ],
 })
 
-testPathCommand('test for PathCommand.validate()', {
+testPathCommand('test for PathCommand.validateParams()', {
   rejects: [
     {
       name: 'sholud usable default separator',
