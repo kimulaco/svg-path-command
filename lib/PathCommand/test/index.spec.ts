@@ -1,5 +1,7 @@
 import { testPathCommand } from './helpers/testPathCommand'
 
+global.console.warn = jest.fn()
+
 testPathCommand('test for PathCommand constructor', {
   resolves: [
     {
@@ -61,4 +63,60 @@ testPathCommand('test for PathCommand.stringify()', {
       error: 'Invalid separator: .',
     },
   ],
+})
+
+testPathCommand('test for PathCommand.updateValue()', {
+  resolves: [
+    {
+      name: 'sholud update value',
+      args: ['L', [1, 2]],
+      beforeTest: (cmd) => {
+        cmd.updateValue({
+          x: 11,
+          y: 12,
+        })
+        return cmd
+      },
+      getters: {
+        command: 'L',
+        params: [11, 12],
+        value: {
+          x: 11,
+          y: 12,
+        },
+      },
+    },
+  ],
+
+  rejects: [],
+})
+
+testPathCommand('test for PathCommand.updateResult()', {
+  resolves: [
+    {
+      name: 'sholud update value',
+      args: ['L', [1, 2]],
+      beforeTest: (cmd) => {
+        cmd.updateResult({
+          x: 11,
+          y: 12,
+        })
+        return cmd
+      },
+      getters: {
+        command: 'L',
+        params: [11, 12],
+        value: {
+          x: 11,
+          y: 12,
+        },
+      },
+      afterTest: (cmd) => {
+        expect(global.console.warn).toHaveBeenCalledTimes(1)
+        return cmd
+      },
+    },
+  ],
+
+  rejects: [],
 })

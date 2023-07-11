@@ -5,6 +5,7 @@ export type ResolveTest = {
   name: string
   args: [CommandTypes, PathCommandParams]
   beforeTest?: (cmd: PathCommand) => PathCommand
+  afterTest?: (cmd: PathCommand) => PathCommand
   data?: Record<string, unknown>
   getters?: Record<string, unknown>
   methods?: Record<string, [unknown, unknown]>
@@ -14,6 +15,7 @@ export type RejectTest = {
   name: string
   args: [CommandTypes, PathCommandParams]
   beforeTest?: (cmd: PathCommand) => PathCommand
+  afterTest?: (cmd: PathCommand) => PathCommand
   error: string
 }
 
@@ -58,6 +60,10 @@ export const testPathCommand = (title: string, testConfig: TestConfig) => {
                 expect((cmd as any)[methodName](args)).toEqual(returnValue)
               }
             }
+
+            if (resolveTest.afterTest) {
+              cmd = resolveTest.afterTest(cmd)
+            }
           })
         }
       })
@@ -69,13 +75,14 @@ export const testPathCommand = (title: string, testConfig: TestConfig) => {
         for (const rejectTest of rejectTests) {
           test(rejectTest.name, () => {
             const createInstance = () => {
-              const cmd = new PathCommand(
-                rejectTest.args[0],
-                rejectTest.args[1]
-              )
+              let cmd = new PathCommand(rejectTest.args[0], rejectTest.args[1])
 
-              if (typeof rejectTest.beforeTest === 'function') {
-                rejectTest.beforeTest(cmd)
+              if (rejectTest.beforeTest) {
+                cmd = rejectTest.beforeTest(cmd)
+              }
+
+              if (rejectTest.afterTest) {
+                rejectTest.afterTest(cmd)
               }
             }
 

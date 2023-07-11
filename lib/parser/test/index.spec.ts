@@ -9,6 +9,12 @@ describe('test for parser', () => {
     expect(pathCommandList.commands).toHaveLength(4)
   })
 
+  it('should throw error if empty string', () => {
+    expect(() => {
+      parsePathCommandList('')
+    }).toThrow('command string must be at least 1 character')
+  })
+
   it('should throw error if no numeric params', () => {
     expect(() => {
       parsePathCommandList('L one 2 Z')
