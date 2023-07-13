@@ -11,7 +11,7 @@ export type RelativeACommandParseResult = CommandParseResult<
 
 export const ABSOLUTE_A = 'A'
 export const RELATIVE_A = 'a'
-export const PARAM_LENGTH_A = 6
+export const PARAM_LENGTH_A = 7
 
 export class AbsoluteACommand extends Command<
   typeof ABSOLUTE_A,
