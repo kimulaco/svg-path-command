@@ -27,6 +27,38 @@ jobs:
       - run: npm ci
       - run: npm run build
 
+  benchmark:
+    name: Benchmark on Node.js ${{ matrix.node }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18]
+        os: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm run build
+      - run: node benchmark/index.js | tee benchmark/output.txt
+      - name: Download previous benchmark data
+        uses: actions/cache@v3
+        with:
+          path: ./cache
+          key: ${{ matrix.os }}-node${{ matrix.node }}-benchmark
+      - name: Store benchmark result
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          tool: 'benchmarkjs'
+          output-file-path: benchmark/output.txt
+          external-data-json-path: ./cache/benchmark-data.json
+          summary-always: true
+          comment-always: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
   test_unit:
     name: Unit Test on Node.js ${{ matrix.node }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
