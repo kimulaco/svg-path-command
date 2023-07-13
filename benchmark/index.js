@@ -5,7 +5,7 @@ const SvgPathCommand = require('../dist/svg-path-command.umd.js')
 const suite = new Benchmark.Suite()
 
 const SAMPLE_COMMAND =
-  'A 10 20 1 1 50 60 a 10 20 1 1 50 60 ' +
+  'A 10 20 1 1 50 60 70 a 10 20 1 1 50 60 70 ' +
   'C 10 20 30 40 50 60 c 10 20 30 40 50 60 ' +
   'H 10 h 10 ' +
   'L 10 20 l 10 20 ' +
@@ -21,9 +21,9 @@ suite
     SvgPathCommand.parse(TEST_COMMAND)
   })
   .on('cycle', (event) => {
-    if (event.error) {
-      console.error(event.error)
-      throw event.error
+    if (event.target.error) {
+      console.error(event.target.error)
+      throw event.target.error
     }
 
     console.log(String(event.target))

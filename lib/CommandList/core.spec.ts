@@ -65,26 +65,26 @@ describe('splitCommand', () => {
 
 describe('parseCommand', () => {
   describe('AbsoluteACommand', () => {
-    test('A100,200 0 1 300,400', async () => {
-      const commands = parseCommand('A100,200 0 1 300,400')
+    test('A100,200 300 0 1 400,500', async () => {
+      const commands = parseCommand('A100,200 300 0 1 400,500')
 
       expect(commands.length).toBe(1)
       toEqualCommand(commands[0], {
         command: 'A',
-        params: [100, 200, 0, 1, 300, 400],
+        params: [100, 200, 300, 0, 1, 400, 500],
         instanceClass: AbsoluteACommand,
       })
     })
   })
 
   describe('RelativeACommand', () => {
-    test('a100,200 0 1 300,400', async () => {
-      const commands = parseCommand('a100,200 0 1 300,400')
+    test('a100,200 300 0 1 400,500', async () => {
+      const commands = parseCommand('a100,200 300 0 1 400,500')
 
       expect(commands.length).toBe(1)
       toEqualCommand(commands[0], {
         command: 'a',
-        params: [100, 200, 0, 1, 300, 400],
+        params: [100, 200, 300, 0, 1, 400, 500],
         instanceClass: RelativeACommand,
       })
     })

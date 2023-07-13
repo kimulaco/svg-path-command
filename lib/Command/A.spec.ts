@@ -1,21 +1,23 @@
 import { AbsoluteACommand, RelativeACommand } from './A'
 
-const PARAMS = [100, 200, 0, 1, 300, 400]
+const PARAMS = [100, 200, 300, 0, 1, 400, 500]
 const ABSOLUTE_RESULT = {
   rx: 100,
   ry: 200,
+  xAxisRotation: 300,
   largeArcFlag: 0,
   sweepFlag: 1,
-  x: 300,
-  y: 400,
+  x: 400,
+  y: 500,
 }
 const RELATIVE_RESULT = {
   rx: 100,
   ry: 200,
+  xAxisRotation: 300,
   largeArcFlag: 0,
   sweepFlag: 1,
-  dx: 300,
-  dy: 400,
+  dx: 400,
+  dy: 500,
 }
 
 describe('AbsoluteACommand', () => {
@@ -42,14 +44,15 @@ describe('AbsoluteACommand', () => {
     command.marshall()
     expect(command.result).toEqual(ABSOLUTE_RESULT)
 
-    const NEW_PARAMS = [500, 600, 1, 0, 700, 800]
+    const NEW_PARAMS = [500, 600, 700, 1, 0, 800, 900]
     const NEW_RESULT = {
       rx: 500,
       ry: 600,
+      xAxisRotation: 700,
       largeArcFlag: 1,
       sweepFlag: 0,
-      x: 700,
-      y: 800,
+      x: 800,
+      y: 900,
     }
     command.updateResult(NEW_RESULT)
 
@@ -63,10 +66,10 @@ describe('AbsoluteACommand', () => {
 
   test('Validate error', async () => {
     const createInvalidInstance = () => {
-      new AbsoluteACommand('A', [100, 200, 0, 1, 300, 400, 500])
+      new AbsoluteACommand('A', [100, 200, 300, 0, 1, 300, 400, 500])
     }
     expect(createInvalidInstance).toThrow(
-      'Command validate error: A, 100,200,0,1,300,400,500'
+      'Command validate error: A, 100,200,300,0,1,300,400,500'
     )
   })
 })
@@ -95,14 +98,15 @@ describe('RelativeACommand', () => {
     command.marshall()
     expect(command.result).toEqual(RELATIVE_RESULT)
 
-    const NEW_PARAMS = [500, 600, 1, 0, 700, 800]
+    const NEW_PARAMS = [500, 600, 700, 1, 0, 800, 900]
     const NEW_RESULT = {
       rx: 500,
       ry: 600,
+      xAxisRotation: 700,
       largeArcFlag: 1,
       sweepFlag: 0,
-      dx: 700,
-      dy: 800,
+      dx: 800,
+      dy: 900,
     }
     command.updateResult(NEW_RESULT)
 
@@ -116,10 +120,10 @@ describe('RelativeACommand', () => {
 
   test('Validate error', async () => {
     const createInvalidInstance = () => {
-      new RelativeACommand('a', [100, 200, 0, 1, 300, 400, 500])
+      new RelativeACommand('a', [100, 200, 300, 0, 1, 300, 400, 500])
     }
     expect(createInvalidInstance).toThrow(
-      'Command validate error: a, 100,200,0,1,300,400,500'
+      'Command validate error: a, 100,200,300,0,1,300,400,500'
     )
   })
 })
