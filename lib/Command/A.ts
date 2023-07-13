@@ -3,10 +3,10 @@ import type { CommandParseResult } from './Command'
 import { ParserError } from '../ParserError'
 
 export type AbsoluteACommandParseResult = CommandParseResult<
-  'rx' | 'ry' | 'largeArcFlag' | 'sweepFlag' | 'x' | 'y'
+  'rx' | 'ry' | 'xAxisRotation' | 'largeArcFlag' | 'sweepFlag' | 'x' | 'y'
 >
 export type RelativeACommandParseResult = CommandParseResult<
-  'rx' | 'ry' | 'largeArcFlag' | 'sweepFlag' | 'dx' | 'dy'
+  'rx' | 'ry' | 'xAxisRotation' | 'largeArcFlag' | 'sweepFlag' | 'dx' | 'dy'
 >
 
 export const ABSOLUTE_A = 'A'
@@ -21,10 +21,11 @@ export class AbsoluteACommand extends Command<
     const result: AbsoluteACommandParseResult = {
       rx: this.params[0],
       ry: this.params[1],
-      largeArcFlag: this.params[2],
-      sweepFlag: this.params[3],
-      x: this.params[4],
-      y: this.params[5],
+      xAxisRotation: this.params[2],
+      largeArcFlag: this.params[3],
+      sweepFlag: this.params[4],
+      x: this.params[5],
+      y: this.params[6],
     }
 
     this.setResult(result)
@@ -41,6 +42,7 @@ export class AbsoluteACommand extends Command<
     const params = [
       result.rx,
       result.ry,
+      result.xAxisRotation,
       result.largeArcFlag,
       result.sweepFlag,
       result.x,
@@ -62,6 +64,7 @@ export class AbsoluteACommand extends Command<
     return (
       typeof value?.rx === 'number' &&
       typeof value?.ry === 'number' &&
+      typeof value?.xAxisRotation === 'number' &&
       typeof value?.largeArcFlag === 'number' &&
       typeof value?.sweepFlag === 'number' &&
       typeof value?.x === 'number' &&
@@ -78,10 +81,11 @@ export class RelativeACommand extends Command<
     const result: RelativeACommandParseResult = {
       rx: this.params[0],
       ry: this.params[1],
-      largeArcFlag: this.params[2],
-      sweepFlag: this.params[3],
-      dx: this.params[4],
-      dy: this.params[5],
+      xAxisRotation: this.params[2],
+      largeArcFlag: this.params[3],
+      sweepFlag: this.params[4],
+      dx: this.params[5],
+      dy: this.params[6],
     }
 
     this.setResult(result)
@@ -98,6 +102,7 @@ export class RelativeACommand extends Command<
     const params = [
       result.rx,
       result.ry,
+      result.xAxisRotation,
       result.largeArcFlag,
       result.sweepFlag,
       result.dx,
@@ -119,6 +124,7 @@ export class RelativeACommand extends Command<
     return (
       typeof value?.rx === 'number' &&
       typeof value?.ry === 'number' &&
+      typeof value?.xAxisRotation === 'number' &&
       typeof value?.largeArcFlag === 'number' &&
       typeof value?.sweepFlag === 'number' &&
       typeof value?.dx === 'number' &&
