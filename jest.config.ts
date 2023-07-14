@@ -13,6 +13,9 @@ const config: Config.InitialOptions = {
   testMatch: ['/**/*.spec.ts'],
   collectCoverage: true,
   collectCoverageFrom: ['<rootDir>/lib/**/*.ts'],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/lib/PathCommand/test/helpers/testPathCommand.ts',
+  ],
 }
 
 export default config
