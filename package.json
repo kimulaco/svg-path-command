@@ -48,7 +48,8 @@
     "lint:format:fix": "prettier --write --ignore-path .gitignore .",
     "lint": "npm run lint:script && npm run lint:format",
     "lint:fix": "npm run lint:script:fix && npm run lint:format:fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typedoc": "typedoc lib/index.ts"
   },
   "devDependencies": {
     "@types/jest": "^29.5.1",
@@ -62,6 +63,7 @@
     "prettier": "^2.8.7",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
+    "typedoc": "^0.24.8",
     "typescript": "^5.0.4",
     "vite": "^4.3.1"
   }

@@ -27,3 +27,6 @@ coverage
 
 # benchmark
 benchmark/output.txt
+
+# typedoc
+docs
