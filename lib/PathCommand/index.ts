@@ -62,11 +62,11 @@ export class PathCommand {
 
   private convertValueToParams(
     command: CommandTypes,
-    value: PathCommandValue
+    value: PathCommandValue,
   ): PathCommandParams {
     const keys = PATH_COMMAND_PARAMS_MAP[command]
     const error = new Error(
-      `Invalid value of ${command} command: ${JSON.stringify(value)}`
+      `Invalid value of ${command} command: ${JSON.stringify(value)}`,
     )
 
     if (keys.length !== Object.keys(value).length) {
@@ -93,7 +93,7 @@ export class PathCommand {
       throw new Error(
         `Invalid params of ${command} command: [${(
           params as PathCommandParams
-        ).join(', ')}]`
+        ).join(', ')}]`,
       )
     }
   }
@@ -126,7 +126,7 @@ export class PathCommand {
 
   updateResult(value: PathCommandValue): void {
     console.warn(
-      'updateResult is deprecated so will be removed in the future. use updateValue.'
+      'updateResult is deprecated so will be removed in the future. use updateValue.',
     )
     this.updateValue(value)
   }

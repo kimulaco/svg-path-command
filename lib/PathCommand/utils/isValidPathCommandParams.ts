@@ -6,7 +6,7 @@ import {
 
 export const isValidPathCommandParams = (
   command: CommandTypes,
-  params: number[]
+  params: number[],
 ): params is PathCommandParams => {
   return PATH_COMMAND_PARAMS_MAP[command].length === params.length
 }

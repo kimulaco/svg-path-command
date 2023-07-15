@@ -7,7 +7,7 @@ import {
 import { PathCommandList } from '../PathCommandList'
 
 const splitCommand = (
-  commandString: string
+  commandString: string,
 ): { command: string; params: number[] } => {
   if (commandString.length < 1)
     throw new Error('command string must be at least 1 character')
@@ -42,11 +42,11 @@ const parseCommandParams = (commandString: string): number[] => {
 }
 
 export const parsePathCommandList = (
-  commandString: string
+  commandString: string,
 ): PathCommandList => {
   const commands: PathCommand[] = []
   const commandStringList = commandString.split(
-    new RegExp(`(?=${PATH_COMMAND_COMMANDS.join('|')})`, 'g')
+    new RegExp(`(?=${PATH_COMMAND_COMMANDS.join('|')})`, 'g'),
   )
 
   for (const commandStringItem of commandStringList) {
