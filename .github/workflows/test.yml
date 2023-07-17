@@ -1,4 +1,4 @@
-name: Test
+name: Test and deploy
 
 on:
   push:
@@ -96,3 +96,34 @@ jobs:
           node-version: '18.x'
       - run: npm ci
       - run: npm run lint
+
+  docs:
+    environment:
+      name: docs
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18]
+        os: [ubuntu-latest]
+    needs: [build, benchmark, test_unit, lint]
+    if: github.head_ref == 'feat/deploy-docs' # TODO:change to 'released'
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - run: npm ci
+      - run: npm run typedoc
+      - name: Upload docs to artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: docs/
+      - name: Deploy docs to GitHub Pages
+        id: docs
+        uses: actions/deploy-pages@v2
