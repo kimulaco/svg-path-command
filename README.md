@@ -31,6 +31,8 @@ pathCommand.commands[1].updateValue({
 console.log(pathCommand.stringify()) // 'M4 16 L10 4 L8 8'
 ```
 
+See [API Doc](https://kimulaco.github.io/svg-path-command/) for detailed usage
+
 ## License
 
 [MIT License](LICENSE).

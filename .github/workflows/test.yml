@@ -108,7 +108,7 @@ jobs:
         node: [18]
         os: [ubuntu-latest]
     needs: [build, benchmark, test_unit, lint]
-    if: github.head_ref == 'feat/deploy-docs' # TODO:change to 'released'
+    if: github.head_ref == 'released'
     permissions:
       pages: write
       id-token: write
