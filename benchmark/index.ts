@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const Benchmark = require('benchmark')
-const SvgPathCommand = require('../dist/svg-path-command.umd.js')
+import Benchmark from 'benchmark'
+import { parse } from '../dist/svg-path-command.es.js'
 
 const suite = new Benchmark.Suite()
 
@@ -18,7 +17,7 @@ const TEST_COMMAND = `${[...Array(10)].map(() => SAMPLE_COMMAND).join('')} Z`
 
 suite
   .add('parse', () => {
-    SvgPathCommand.parse(TEST_COMMAND)
+    parse(TEST_COMMAND)
   })
   .on('cycle', (event) => {
     if (event.target.error) {
